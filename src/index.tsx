@@ -19,7 +19,9 @@ import {
 } from "react-router-dom";
 
 import {getCookie, setCookie, deleteCookie} from "./helpers/cookie";
+
 import LoginContainer from "./containers/LoginContainer/LoginContainer";
+import ScheduleContainer from "./containers/ScheduleContainer/ScheduleContainer";
 
 const App = () => {
     useEffect(() => {
@@ -37,6 +39,9 @@ const App = () => {
                 <Provider>
                     <Route path={"/login"}>
                         <LoginContainer/>
+                    </Route>
+                    <Route path={"/"}>
+                        <ScheduleContainer/>
                     </Route>
                 </Provider>
             </ApolloProvider>
