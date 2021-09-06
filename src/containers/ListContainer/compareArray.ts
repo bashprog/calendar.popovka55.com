@@ -1,4 +1,4 @@
-import {DatesArray} from "../../interfaces";
+import {DatesArray} from "../../helpers/interfaces";
 
 function compare(a: any, b: any) {
     if (+a.date < +b.date)

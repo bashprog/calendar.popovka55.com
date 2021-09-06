@@ -1,6 +1,6 @@
 import React from "react";
 
-import {DatesArray} from "../../interfaces";
+import {DatesArray} from "../../helpers/interfaces";
 
 import Grid from '@material-ui/core/Grid';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme: Theme) =>
 interface ScheduleProps {
     array?: DatesArray[]
 }
-
 
 const Schedule: React.FC<ScheduleProps> = ({array}) => {
     const classes = useStyles();

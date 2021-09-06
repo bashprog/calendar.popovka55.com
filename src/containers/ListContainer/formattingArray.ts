@@ -1,4 +1,4 @@
-import {DatesArray} from "../../interfaces";
+import {DatesArray} from "../../helpers/interfaces";
 
 interface FormattingArray {
     day: string;
@@ -51,6 +51,6 @@ export const formattingArray = (array: DatesArray[] | any) => {
         formattingArray.push(obj);
     });
 
-    return formattingArray;
+    return formattingArray || undefined;
 };
 
