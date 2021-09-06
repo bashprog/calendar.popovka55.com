@@ -2,9 +2,6 @@ import React from "react";
 
 import Schedule from "../../components/Schedule/Schedule";
 
-import {sortArray} from "./sortArray";
-import {checkArray} from "./checkArray";
-
 const ScheduleContainer = () => {
     let array = [
         {
@@ -30,12 +27,8 @@ const ScheduleContainer = () => {
         },
     ];
 
-    let test: any = sortArray(array);
-
-    checkArray(test);
-
     return (
-        <Schedule array={test}/>
+        <Schedule array={array}/>
     )
 };
 

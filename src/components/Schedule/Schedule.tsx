@@ -1,7 +1,10 @@
 import React from "react";
 
+import {DatesArray} from "../../interfaces";
+
 import Grid from '@material-ui/core/Grid';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
+import ListContainer from "../../containers/ListContainer/ListContainer";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -28,26 +31,13 @@ interface ScheduleProps {
     array?: DatesArray[]
 }
 
-interface DatesArray {
-    date: string,
-    duration: number,
-    author: { name: string },
-}
 
 const Schedule: React.FC<ScheduleProps> = ({array}) => {
     const classes = useStyles();
 
-    console.log(array);
-
     return (
         <section>
-            <div className={classes.tableBox}>
-                <Grid container spacing={0}>
-                    <Grid item xs={12} className={classes.tableSector}>
-
-                    </Grid>
-                </Grid>
-            </div>
+            <ListContainer array={array} />
         </section>
     )
 };
