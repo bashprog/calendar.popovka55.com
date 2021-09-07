@@ -22,6 +22,7 @@ import {getCookie, setCookie, deleteCookie} from "./helpers/cookie";
 
 import LoginContainer from "./containers/LoginContainer/LoginContainer";
 import ScheduleContainer from "./containers/ScheduleContainer/ScheduleContainer";
+import NavBar from "./components/NavBar/NavBar";
 
 const App = () => {
     useEffect(() => {
@@ -41,6 +42,7 @@ const App = () => {
                         <LoginContainer/>
                     </Route>
                     <Route path={"/"}>
+                        <NavBar/>
                         <ScheduleContainer/>
                     </Route>
                 </Provider>

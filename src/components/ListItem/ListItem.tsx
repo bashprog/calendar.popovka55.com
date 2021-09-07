@@ -70,10 +70,6 @@ const ListItem: React.FC<ListItemsProps> = ({day, item}) => {
         if (width < 500)
             chars = 15;
 
-        console.log(width);
-        console.log(chars);
-
-
         return text.slice(0, chars) + (text.length > chars ? "..." : "");
     };
 
