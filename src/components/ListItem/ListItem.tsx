@@ -38,8 +38,14 @@ const useStyles = makeStyles((theme: Theme) =>
             justifyContent: "center",
             alignItems: "center",
             overflow: "hidden",
+            color: "rgba(0, 0, 0, 0.54)",
             "& svg": {
-                padding: 5
+                padding: 5,
+                cursor: "pointer",
+                transition: ".3s ",
+                "&:hover": {
+                    color: "black"
+                },
             }
         }
     }));
