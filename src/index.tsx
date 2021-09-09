@@ -23,6 +23,7 @@ import {getCookie, setCookie, deleteCookie} from "./helpers/cookie";
 import LoginContainer from "./containers/LoginContainer/LoginContainer";
 import ScheduleContainer from "./containers/ScheduleContainer/ScheduleContainer";
 import NavBar from "./components/NavBar/NavBar";
+import Preloader from "./components/Preloader/Preloader";
 
 const App = () => {
     useEffect(() => {
@@ -38,12 +39,12 @@ const App = () => {
         <BrowserRouter>
             <ApolloProvider client={client}>
                 <Provider>
-                    <Route path={"/login"}>
-                        <LoginContainer/>
-                    </Route>
                     <Route path={"/"}>
                         <NavBar/>
                         <ScheduleContainer/>
+                    </Route>
+                    <Route path={"/login"}>
+                        <LoginContainer/>
                     </Route>
                 </Provider>
             </ApolloProvider>

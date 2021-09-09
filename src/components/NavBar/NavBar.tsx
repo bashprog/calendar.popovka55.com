@@ -28,8 +28,8 @@ const useStyles = makeStyles({
     },
     btn: {
         position: "absolute",
-        right: 20,
-        top: 20,
+        right: 12,
+        top: 12,
         zIndex: 100
     },
     listItem: {
@@ -38,6 +38,11 @@ const useStyles = makeStyles({
     icon: {
         display: "flex",
         justifyContent: "center",
+        "@media (max-width: 680px)": {
+            "& svg" :{
+                fontSize: "2.1rem"
+            }
+        }
     },
     listText: {
         "@media (max-width: 680px)": {

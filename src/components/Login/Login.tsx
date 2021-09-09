@@ -25,8 +25,11 @@ const useStyles = makeStyles((theme: Theme) =>
             alignItems: "center",
             flexDirection: "column",
             maxWidth: "600px",
-            height: "100px",
-            margin: "auto",
+            minHeight: "100px",
+            margin: 20,
+            borderRadius: 15,
+            padding: 20,
+            border: "1px solid rgba(0, 0, 0, 0.2)"
         },
         gridItem: {
             display: "flex",
