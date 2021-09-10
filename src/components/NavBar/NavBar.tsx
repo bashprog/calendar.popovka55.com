@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 import {makeStyles} from '@material-ui/core/styles';
 
@@ -48,6 +48,9 @@ const useStyles = makeStyles({
         "@media (max-width: 680px)": {
             display: "none"
         }
+    },
+    dn: {
+        display: "none"
     }
 });
 
@@ -69,8 +72,10 @@ const NavBar = () => {
         setState(open);
     };
 
+    let history = useHistory();
+
     return (
-        <div>
+        <div className={history.location.pathname == "/login" ? classes.dn : ""}>
             <React.Fragment>
                 <Button className={classes.btn} variant="contained" onClick={toggleDrawer(true)}><MenuIcon/></Button>
                 <SwipeableDrawer

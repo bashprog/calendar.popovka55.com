@@ -41,6 +41,8 @@ const App = () => {
                 <Provider>
                     <Route path={"/"}>
                         <NavBar/>
+                    </Route>
+                    <Route path={"/"} exact>
                         <ScheduleContainer/>
                     </Route>
                     <Route path={"/login"}>
