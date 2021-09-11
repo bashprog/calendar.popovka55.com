@@ -25,7 +25,14 @@ import ScheduleContainer from "./containers/ScheduleContainer/ScheduleContainer"
 import NavBar from "./components/NavBar/NavBar";
 import Preloader from "./components/Preloader/Preloader";
 
+import Auth from "./helpers/auth"
+
+import {useAtom} from "jotai";
+import {authAtom} from "./atoms";
+
 const App = () => {
+    const [auth, updateAuth] = useAtom(authAtom);
+
     useEffect(() => {
 
     }, []);
@@ -34,6 +41,10 @@ const App = () => {
         uri: "http://localhost:4001/graphql",
         // uri: "http://153.92.214.247:4001/graphql"
     });
+
+    // auth.loginByToken("pLNVJEbazwLdkzBshSCL78BxwtGikR1r").then(() => console.log(auth.getInfo()));
+    auth.loginByPassword("test@bk.ru", "322").then(() => console.log(auth.getInfo()));
+    // console.log("a.getInfo()", a.getInfo());
 
     return (
         <BrowserRouter>

@@ -4,10 +4,9 @@ export const loginByPassword = gql`
     mutation loginByPassword($login: String!, $password: String!){
         login(login: $login, password: $password){
             _id
-            token
-            role
             name
-            login
+            email
+            token
         }
     }
 `;
