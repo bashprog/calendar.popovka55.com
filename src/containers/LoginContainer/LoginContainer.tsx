@@ -3,18 +3,27 @@ import Login from "../../components/Login/Login";
 
 import {getCookie} from "../../helpers/cookie";
 
-import {loginByToken} from "../../gql/queries/LoginByToken";
-import {loginByPassword} from "../../gql/queries/LoginByPassword";
-
-import {useQuery, useMutation} from "react-apollo";
+import {useAtom} from "jotai";
+import {authAtom} from "../../atoms";
+import Preloader from "../../components/Preloader/Preloader";
 
 const LoginContainer: React.FC = () => {
+    const [auth, changeAuth] = useAtom(authAtom);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (!auth.authenticated) {
+            auth.loginByToken("7YuvMDj0hGmU1ZVDA5G94TjW319Z09Ic").then(() => {setLoading(false)});
+        }
+
+    }, []);
+
     let token = getCookie("token");
 
-
-
     return (
-        <Login login={() => {return null}} error={false}/>
+        <>
+            {loading ? <Preloader/> : <Login login={() => {return null}} error={false}/>}
+        </>
     )
 };
 

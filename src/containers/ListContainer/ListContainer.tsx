@@ -2,8 +2,7 @@ import React from "react";
 
 import {DatesArray} from "../../helpers/interfaces";
 
-import {compareArray} from "./compareArray";
-import {formattingArray} from "./formattingArray";
+import {comparedAndFormattingDates} from "../../helpers/compareAndFormattingDate";
 
 import ListItem from "../../components/ListItem/ListItem";
 
@@ -31,8 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const ListContainer: React.FC<ListContainerProps> = ({array}) => {
     const classes = useStyles();
 
-    let temp = compareArray(array);
-    let list: any = formattingArray(temp);
+    let list: any = comparedAndFormattingDates(array);
 
     return (
         <Grid container className={classes.tableBox}>

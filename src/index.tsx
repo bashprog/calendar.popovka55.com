@@ -42,10 +42,6 @@ const App = () => {
         // uri: "http://153.92.214.247:4001/graphql"
     });
 
-    // auth.loginByToken("pLNVJEbazwLdkzBshSCL78BxwtGikR1r").then(() => console.log(auth.getInfo()));
-    auth.loginByPassword("test@bk.ru", "322").then(() => console.log(auth.getInfo()));
-    // console.log("a.getInfo()", a.getInfo());
-
     return (
         <BrowserRouter>
             <ApolloProvider client={client}>
@@ -56,9 +52,11 @@ const App = () => {
                     <Route path={"/"} exact>
                         <ScheduleContainer/>
                     </Route>
-                    <Route path={"/login"}>
-                        <LoginContainer/>
-                    </Route>
+                    <Switch>
+                        <Route path={"/login"} exact>
+                            <LoginContainer/>
+                        </Route>
+                    </Switch>
                 </Provider>
             </ApolloProvider>
         </BrowserRouter>

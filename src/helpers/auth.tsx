@@ -42,7 +42,7 @@ class Auth {
         }).then(res => res.json())
             .then(result => {
                 if (result.data.loginByToken) {
-                    this.writeInfo(result.data.loginByToken());
+                    this.writeInfo(result.data.loginByToken);
                 } else {
                     this.errorMessage = "Cannot find user with token";
                 }
