@@ -56,13 +56,14 @@ const Login: React.FC<loginProps> = ({login, error}) => {
 
     return (
         <section className={classes.section}>
-            <div className={classes.container}>
+            <form autoComplete={'off'} className={classes.container}>
                 <Grid container spacing={1}>
                     <Grid item xs={12} sm={6} className={classes.gridItem}>
                         <TextField
                             required
                             id="login"
                             label="E-mail"
+                            autoComplete={'off'}
                             variant="outlined"
                             error={error}
                             onKeyDown={(e) => (e.key == "Enter") && (document.getElementById("submit") as HTMLFormElement).click()}
@@ -83,12 +84,12 @@ const Login: React.FC<loginProps> = ({login, error}) => {
                 </Grid>
                 <Grid container>
                     <Grid item xs={12} className={classes.gridItem}>
-                        <Button variant="outlined" id={"submit"} color={error ? "secondary" : "primary"} disableElevation onClick={login} style={{"margin":"8px"}}>
+                        <Button variant="outlined" id={"submit"} color={"primary"} disableElevation onClick={login} style={{"margin":"8px"}}>
                             Войти
                         </Button>
                     </Grid>
                 </Grid>
-            </div>
+            </form>
         </section>
     )
 };

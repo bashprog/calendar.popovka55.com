@@ -75,8 +75,7 @@ class Auth {
                 if (result.data.login) {
                     this.writeInfo(result.data.login);
                 } else {
-                    this.error = true;
-                    this.errorMessage = "Invalid email or password";
+                    this.loginError();
                 }
             })
     }
@@ -116,7 +115,19 @@ class Auth {
             return;
         }
 
+        this.error = false;
+        this.errorMessage = "";
         this.authenticated = true;
+    }
+
+    serverError(): void {
+        this.error = true;
+        this.errorMessage += "Cannon connect to server";
+    }
+
+    loginError(): void {
+        this.error = true;
+        this.errorMessage += "Invalid email or password";
     }
 
     getInfo = () => {
