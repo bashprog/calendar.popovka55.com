@@ -18,6 +18,8 @@ import {
     Link,
 } from "react-router-dom";
 
+import ProtectedRoute from "./helpers/ProtectedRoute";
+
 import {getCookie, setCookie, deleteCookie} from "./helpers/cookie";
 
 import LoginContainer from "./containers/LoginContainer/LoginContainer";
@@ -49,10 +51,8 @@ const App = () => {
                     <Route path={"/"}>
                         <NavBar/>
                     </Route>
-                    <Route path={"/"} exact>
-                        <ScheduleContainer/>
-                    </Route>
                     <Switch>
+                        <ProtectedRoute path={"/"} exact component={<ScheduleContainer/>}/>
                         <Route path={"/login"} exact>
                             <LoginContainer/>
                         </Route>

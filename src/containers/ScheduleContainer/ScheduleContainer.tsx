@@ -9,7 +9,10 @@ const ScheduleContainer = () => {
             date: "2021-08-08T09:50:00.710+00:00",
             duration: 25,
             author: {
-                name: "Author_name"
+                _id: "1234",
+                name: "Author_name 2",
+                email: "asiugfh123@asg.com",
+                token: ""
             }
         },
         {
@@ -17,7 +20,10 @@ const ScheduleContainer = () => {
             date: "2021-08-18T21:20:00.710+00:00",
             duration: 30,
             author: {
-                name: "Author_name"
+                _id: "123",
+                name: "Author_name",
+                email: "asiugfh@asg.com",
+                token: ""
             }
         },
         {
@@ -25,7 +31,10 @@ const ScheduleContainer = () => {
             date: "2021-08-08T09:20:00.710+00:00",
             duration: 15,
             author: {
-                name: "Author_name"
+                _id: "1235",
+                name: "Author_name 3",
+                email: "assdiugfh@asaag.com",
+                token: ""
             }
         },
     ];
