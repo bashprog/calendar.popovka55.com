@@ -4,15 +4,8 @@ import {Route, Redirect} from "react-router-dom";
 import {useAtom} from "jotai";
 import {authAtom} from "../atoms";
 
-interface IProtectedRoute {
-    Component: any,
-    rest: any
-}
-
 const ProtectedRoute = ({component, ...rest}: any) => {
     const [auth] = useAtom(authAtom);
-
-    console.log(auth);
 
     return (
         <>

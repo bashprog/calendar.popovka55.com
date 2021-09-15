@@ -16,12 +16,17 @@ const LoginContainer: React.FC = () => {
 
     let token = getCookie("token");
 
+    console.log(token);
+
     let history = useHistory();
 
     useEffect(() => {
         if (!auth.authenticated && token && token != "") {
             auth.loginByToken(`${token}`).then(() => {
                 setLoading(false)
+            }).then(() => {
+                if (auth.authenticated)
+                    history.push("/")
             });
         } else {
             setLoading(false);

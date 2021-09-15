@@ -1,3 +1,5 @@
+import {setCookie} from "./cookie";
+
 class Auth {
     authenticated: boolean;
     error: boolean;
@@ -73,6 +75,7 @@ class Auth {
         }).then(r => r.json())
             .then(result => {
                 if (result.data.login) {
+                    setCookie("token", `${result.data.login.token}`, {'max-age': `${3600 * 24 * 14}`});
                     this.writeInfo(result.data.login);
                 } else {
                     this.loginError();
