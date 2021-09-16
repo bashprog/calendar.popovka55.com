@@ -12,6 +12,7 @@ interface ListItemsProps {
     day?: string;
     item?: DatesArray;
 }
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         tableRow: {

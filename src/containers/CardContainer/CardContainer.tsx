@@ -1,33 +1,41 @@
 import React from "react";
 
-import {DatesArray} from "../../helpers/interfaces";
+import {IFormattingDates} from "../../helpers/interfaces";
 
 import Grid from '@material-ui/core/Grid';
 import {createStyles, makeStyles, Theme} from "@material-ui/core";
 
-interface ICardContainer {
-    array?: DatesArray[]
+import CardItem from "../../components/CardItem/CardItem";
+
+interface IProps {
+    array: IFormattingDates[] | undefined
 }
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        tableBox: {
+        cardContainer: {
             maxWidth: "1200px",
             width: "100%",
-            margin: "50px auto 0",
-            border: "1px solid rgba(0, 0, 0, 0.2)",
-            borderRadius: "8px",
-            flexDirection: "column",
-            overflow: "hidden",
+            margin: "0 auto",
+            "@media (max-width: 600px)": {
+                justifyContent: "center"
+            }
         },
     })
 );
 
-const CardContainer: React.FC<ICardContainer> = ({array}) => {
+const CardContainer: React.FC<IProps> = ({array}) => {
+    const classes = useStyles();
+
     return (
         <section>
-            <Grid container >
-                
+            <Grid container className={classes.cardContainer}>
+                {array && array.map((val: any, key: any) => (
+                    <React.Fragment key={key}>
+                        <CardItem day={val.day} />
+                        {val.array && val.array.map((value: any) => <CardItem item={value} key={value.id} />)}
+                    </React.Fragment>
+                ))}
             </Grid>
         </section>
     )

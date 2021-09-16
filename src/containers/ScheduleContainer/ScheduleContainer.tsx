@@ -39,6 +39,28 @@ const ScheduleContainer = () => {
                 token: ""
             }
         },
+        {
+            id: "sdk51gs1da123g2",
+            date: "2021-08-08T09:20:00.710+00:00",
+            duration: 15,
+            author: {
+                _id: "13235",
+                name: "Author_name 4",
+                email: "assdiugfh@asaag.com",
+                token: ""
+            }
+        },
+        {
+            id: "sdk51gs1da123g2",
+            date: "2021-08-08T09:20:00.710+00:00",
+            duration: 15,
+            author: {
+                _id: "13235",
+                name: "Author_name 4",
+                email: "assdiugfh@asaag.com",
+                token: ""
+            }
+        },
     ];
 
     let list = comparedAndFormattingDates(array);
