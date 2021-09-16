@@ -1,9 +1,6 @@
 import {DatesArray} from "./interfaces"
 
-interface FormattingArray {
-    day: string;
-    array: DatesArray[];
-}
+import {IFormattingDates} from "./interfaces";
 
 let monthArray: string[] = [
     "Января",
@@ -58,15 +55,15 @@ const compareArray = (array: DatesArray[] | any) => {
     return comparedArray;
 };
 
-const formattingArray = (array: DatesArray[] | any) => {
+const formattingArray = (array: DatesArray[] | any): IFormattingDates[] | undefined => {
     if (!Array.isArray(array) || !array) {
         console.log("Error. Arg isn't array");
-        return null;
+        return undefined;
     }
 
     let daysArray: string[] = [];
 
-    let formattingArray: FormattingArray[] = [];
+    let formattingArray: IFormattingDates[] = [];
 
     array.forEach(val => {
         daysArray.push(val.date.slice(0, 10));
@@ -75,7 +72,7 @@ const formattingArray = (array: DatesArray[] | any) => {
     daysArray = [... new Set(daysArray)];
 
     daysArray.forEach(val => {
-        let obj: FormattingArray = {
+        let obj: IFormattingDates = {
             day: `${+val.slice(8, 10)} ${monthArray[+val.slice(5,7)]} ${val.slice(0, 4)}`,
             array: []
         };
@@ -89,7 +86,7 @@ const formattingArray = (array: DatesArray[] | any) => {
         formattingArray.push(obj);
     });
 
-    return formattingArray || undefined;
+    return formattingArray;
 };
 
 export const comparedAndFormattingDates = (dates: DatesArray | any) => {

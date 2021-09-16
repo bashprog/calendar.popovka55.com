@@ -2,6 +2,8 @@ import React from "react";
 
 import Schedule from "../../components/Schedule/Schedule";
 
+import {comparedAndFormattingDates} from "../../helpers/compareAndFormattingDate";
+
 const ScheduleContainer = () => {
     let array = [
         {
@@ -39,8 +41,10 @@ const ScheduleContainer = () => {
         },
     ];
 
+    let list = comparedAndFormattingDates(array);
+
     return (
-        <Schedule array={array}/>
+        <Schedule array={list}/>
     )
 };
 

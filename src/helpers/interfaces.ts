@@ -18,3 +18,8 @@ export interface DatesArray {
     author: IUser;
     comments?: IComments[];
 }
+
+export interface IFormattingDates {
+    day: string;
+    array: DatesArray[];
+}

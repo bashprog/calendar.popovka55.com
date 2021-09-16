@@ -1,14 +1,14 @@
 import React from "react";
 
-import {DatesArray} from "../../helpers/interfaces";
+import {IFormattingDates} from "../../helpers/interfaces";
 
 import ListContainer from "../../containers/ListContainer/ListContainer";
 
-interface ScheduleProps {
-    array?: DatesArray[]
+interface IProps {
+    array: IFormattingDates[] | undefined
 }
 
-const Schedule: React.FC<ScheduleProps> = ({array}) => {
+const Schedule: React.FC<IProps> = ({array}) => {
     return (
         <section>
             <ListContainer array={array} />

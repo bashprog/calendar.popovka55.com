@@ -16,8 +16,6 @@ const LoginContainer: React.FC = () => {
 
     let token = getCookie("token");
 
-    console.log(token);
-
     let history = useHistory();
 
     useEffect(() => {

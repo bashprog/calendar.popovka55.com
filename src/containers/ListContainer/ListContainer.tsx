@@ -1,17 +1,11 @@
 import React from "react";
 
-import {DatesArray} from "../../helpers/interfaces";
-
-import {comparedAndFormattingDates} from "../../helpers/compareAndFormattingDate";
+import {IFormattingDates} from "../../helpers/interfaces";
 
 import ListItem from "../../components/ListItem/ListItem";
 
 import Grid from '@material-ui/core/Grid';
 import {createStyles, makeStyles, Theme} from "@material-ui/core";
-
-interface ListContainerProps {
-    array?: DatesArray[];
-}
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -27,14 +21,16 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-const ListContainer: React.FC<ListContainerProps> = ({array}) => {
-    const classes = useStyles();
+interface IProps {
+    array: IFormattingDates[] | undefined
+}
 
-    let list: any = comparedAndFormattingDates(array);
+const ListContainer: React.FC<IProps> = ({array}) => {
+    const classes = useStyles();
 
     return (
         <Grid container className={classes.tableBox}>
-            {list && list.map((val: any, key: any) => (
+            {array && array.map((val: any, key: any) => (
                 <React.Fragment key={key}>
                     <ListItem day={val.day} />
                     {val.array && val.array.map((value: any) => <ListItem item={value} key={value.id} />)}
