@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import Auth from "./helpers/auth";
 
-export const userAtom = atom({});
+import {getCookie} from "./helpers/cookie";
 
 export const tableViewAtom = atom(true);
 

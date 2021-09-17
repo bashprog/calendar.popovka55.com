@@ -27,8 +27,6 @@ import ScheduleContainer from "./containers/ScheduleContainer/ScheduleContainer"
 import NavBar from "./components/NavBar/NavBar";
 import Preloader from "./components/Preloader/Preloader";
 
-import Auth from "./helpers/auth"
-
 import {useAtom} from "jotai";
 import {authAtom} from "./atoms";
 

@@ -40,7 +40,7 @@ const ScheduleContainer = () => {
             }
         },
         {
-            id: "sdk51gs1da123g2",
+            id: "sdk51gs1da123g2agsah",
             date: "2021-08-08T09:20:00.710+00:00",
             duration: 15,
             author: {
@@ -51,7 +51,7 @@ const ScheduleContainer = () => {
             }
         },
         {
-            id: "sdk51gs1da123g2",
+            id: "sdk51gs1da123g2sadasd",
             date: "2021-08-08T09:20:00.710+00:00",
             duration: 15,
             author: {
