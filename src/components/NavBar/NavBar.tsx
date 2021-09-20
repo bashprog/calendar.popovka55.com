@@ -54,7 +54,7 @@ const useStyles = makeStyles({
         }
     },
     listText: {
-        "@media (max-width: 680px)": {
+        "@media (max-width: 600px)": {
             display: "none"
         }
     },

@@ -25,7 +25,7 @@ import {getCookie, setCookie, deleteCookie} from "./helpers/cookie";
 import LoginContainer from "./containers/LoginContainer/LoginContainer";
 import ScheduleContainer from "./containers/ScheduleContainer/ScheduleContainer";
 import NavBar from "./components/NavBar/NavBar";
-import Preloader from "./components/Preloader/Preloader";
+import LogOut from "./containers/LogOut/LogOut"
 
 import {useAtom} from "jotai";
 import {authAtom} from "./atoms";
@@ -55,6 +55,7 @@ const App = () => {
                             <LoginContainer/>
                         </Route>
                     </Switch>
+                    <ProtectedRoute path={"/logout"} exact component={<LogOut/>}/>
                 </Provider>
             </ApolloProvider>
         </BrowserRouter>

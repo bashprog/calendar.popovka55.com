@@ -1,4 +1,4 @@
-import {setCookie} from "./cookie";
+import {deleteCookie, setCookie} from "./cookie";
 
 class Auth {
     authenticated: boolean;
@@ -131,6 +131,19 @@ class Auth {
     loginError(): void {
         this.error = true;
         this.errorMessage += "Invalid email or password";
+    }
+
+     logout(): void {
+        this.authenticated = false;
+        this.error = false;
+        this.errorMessage = "";
+
+        this._id = "";
+        this.name = "";
+        this.email = "";
+        this.token = "";
+
+        deleteCookie("token");
     }
 
     getInfo = () => {
