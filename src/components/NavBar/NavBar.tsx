@@ -147,7 +147,7 @@ const NavBar = () => {
                                 <ListItemText className={classes.listText} primary="Расписание" />
                             </ListItem>
                         </Link>
-                        <Link to={"/add"}>
+                        <Link to={"/addfly"}>
                             <ListItem button className={classes.listItem}>
                                 <ListItemIcon className={classes.icon}>
                                     <AddBoxIcon />
