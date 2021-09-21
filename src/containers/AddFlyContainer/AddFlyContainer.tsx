@@ -1,25 +1,16 @@
 import React from "react";
 import AddFly from "../../components/AddFly/AddFly";
 
+import {useQuery} from "react-apollo";
+import {getAllPlanes} from "../../gql/queries/getAllPlanes";
+import Preloader from "../../components/Preloader/Preloader";
+
 const AddFlyContainer: React.FC = () => {
-    const currencies = [
-        {
-            name: "Cessna 210"
-        },
-        {
-            name: "Cessna 182"
-        },
-        {
-            name: "Cessna 317"
-        },
-        {
-            name: "Sigma"
-        }
-    ];
+    const planes = useQuery(getAllPlanes);
 
     return(
         <>
-            <AddFly currencies={currencies}/>
+            {planes?.loading ? <Preloader/> : <AddFly planes={planes?.data?.getAllPlanes}/>}
         </>
     )
 };

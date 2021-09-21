@@ -42,11 +42,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface IProps {
-    currencies: any[]
+    planes?: {id: string; name: string; __typename?: any}[]
 }
 
 
-const AddFly: React.FC<IProps> = ({currencies}) => {
+const AddFly: React.FC<IProps> = ({planes}) => {
     const classes = useStyles();
 
     const [selectedDate, setSelectedDate] = React.useState<Date | null>(new Date());
@@ -55,12 +55,15 @@ const AddFly: React.FC<IProps> = ({currencies}) => {
         setSelectedDate(date);
     };
 
-    const [currency, setCurrency] = React.useState(`${currencies[0].name}`);
+    const [currency, setCurrency] = React.useState<string | null>(null);
+
+    if (!currency && planes){
+        setCurrency(planes[0].name)
+    }
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrency(event.target.value);
     };
-
 
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -112,17 +115,19 @@ const AddFly: React.FC<IProps> = ({currencies}) => {
                         id="plane"
                         select
                         label="Самолет"
-                        value={currency}
+                        value={currency ? currency : ""}
                         onChange={handleChange}
                         // helperText="Выберите самолет"
                         variant="outlined"
                         className={classes.textField}
                     >
-                        {currencies.map((option) => (
+                        {planes ? planes.map((option) => (
                             <MenuItem key={option.name} value={option.name}>
                                 {option.name}
                             </MenuItem>
-                        ))}
+                        )) : <MenuItem >
+                            {""}
+                        </MenuItem>}
                     </TextField>
                 </Grid>
                 <Grid item xs={12} className={classes.gridItem}>

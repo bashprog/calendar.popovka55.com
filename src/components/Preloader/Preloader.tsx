@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
             width: "100%",
             height: "100vh",
             position: "fixed",
-            background: "rgba(255,255,255, 0.5)",
+            background: "white",
             top: 0,
             zIndex: 10000
         },
