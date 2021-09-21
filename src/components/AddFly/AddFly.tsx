@@ -12,6 +12,7 @@ import TextField from '@material-ui/core/TextField';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import MenuItem from "@material-ui/core/MenuItem";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -42,11 +43,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface IProps {
-    planes?: {id: string; name: string; __typename?: any}[]
+    planes?: {id: string; name: string; __typename?: any}[];
+    add: () => void
 }
 
 
-const AddFly: React.FC<IProps> = ({planes}) => {
+const AddFly: React.FC<IProps> = ({planes, add}) => {
     const classes = useStyles();
 
     const [selectedDate, setSelectedDate] = React.useState<Date | null>(new Date());
@@ -131,7 +133,10 @@ const AddFly: React.FC<IProps> = ({planes}) => {
                     </TextField>
                 </Grid>
                 <Grid item xs={12} className={classes.gridItem}>
-                    <TextField id="comments" label="Комментарии" defaultValue={""} className={classes.comment}/>
+                    <TextField id="comment" label="Комментарий" defaultValue={""} className={classes.comment}/>
+                </Grid>
+                <Grid item xs={12} className={classes.gridItem}>
+                    <Button variant="contained" color={"primary"} onClick={add}>Добавить полет</Button>
                 </Grid>
             </Grid>
         </MuiPickersUtilsProvider>
