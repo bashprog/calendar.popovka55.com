@@ -7,13 +7,19 @@ import Preloader from "../../components/Preloader/Preloader";
 import {useAtom} from "jotai";
 import {authAtom} from "../../atoms";
 
+import { useMutation } from "react-apollo";
+import { addFly } from "../../gql/mutations/addFly";
+
 function formatDate(date: string, time: string) {
     return `${date.slice(6,10)}-${date.slice(3,5)}-${date.slice(0,2)}T${time}:00.000Z`;
 }
 
 const AddFlyContainer: React.FC = () => {
     const [auth] = useAtom(authAtom);
+
     const planes = useQuery(getAllPlanes);
+
+    const [addFlyMut, addFlyInfo] = useMutation(addFly);
 
     const add = (): void => {
         let date = (document.getElementById("date") as HTMLInputElement).value;
@@ -22,15 +28,18 @@ const AddFlyContainer: React.FC = () => {
         let comment = (document.getElementById("comment") as HTMLInputElement).value;
         let plane = (document.getElementById("plane") as HTMLInputElement).textContent;
 
-        let planeObj = planes?.data?.getAllPlanes.find((el: {id: string; name: string; __typename?: any}) => plane == el.name);
+        let planeObj = planes?.data?.getAllPlanes.find((el: {id: string; name: string; __typename?: any}) => plane == el.name); //Get chosen plane object
 
         const obj = {
             date: formatDate(date, time),
             duration: +duration.slice(0, 2) * 60 + +duration.slice(3, 5),
-            comment: comment,
             plane_id: `${planeObj._id}`,
             author_id: `${auth._id}`
         };
+
+        addFlyMut({variables: {author_id: obj.author_id, plane_id: obj.plane_id, date: obj.date, duration: obj.duration}})
+            .then(res => console.log(res))
+            .catch(e => console.log(e));
 
         console.log(obj)
     };

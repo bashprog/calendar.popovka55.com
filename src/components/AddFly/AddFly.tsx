@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme: Theme) =>
         comment: {
             width: "95%",
             margin: "0 2.5%"
+        },
+        btn: {
+            margin: 20
         }
     }),
 );
@@ -136,7 +139,7 @@ const AddFly: React.FC<IProps> = ({planes, add}) => {
                     <TextField id="comment" label="Комментарий" defaultValue={""} className={classes.comment}/>
                 </Grid>
                 <Grid item xs={12} className={classes.gridItem}>
-                    <Button variant="contained" color={"primary"} onClick={add}>Добавить полет</Button>
+                    <Button className={classes.btn} variant="contained" color={"primary"} onClick={add}>Добавить полет</Button>
                 </Grid>
             </Grid>
         </MuiPickersUtilsProvider>
