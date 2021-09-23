@@ -7,7 +7,7 @@ import {useAtom} from "jotai";
 import {authAtom} from "../../atoms";
 import Preloader from "../../components/Preloader/Preloader";
 
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 const LoginContainer: React.FC = () => {
     const [auth, changeAuth] = useAtom(authAtom);
@@ -23,8 +23,12 @@ const LoginContainer: React.FC = () => {
             auth.loginByToken(`${token}`).then(() => {
                 setLoading(false)
             }).then(() => {
-                if (auth.authenticated)
+                if (auth.authenticated) {
                     history.push("/")
+                }
+            }).catch(() => {
+                setLoading(false);
+                changeError(true);
             });
         } else {
             setLoading(false);
@@ -45,17 +49,21 @@ const LoginContainer: React.FC = () => {
                 return;
             }
 
-            if (auth.getInfo().authenticated){
+            if (auth.getInfo().authenticated) {
                 changeError(false);
                 history.push("/")
             }
         })
-            .catch(() => {setLoading(false); auth.serverError();})
+            .catch(() => {
+                setLoading(false);
+                auth.serverError();
+            })
     };
 
     return (
         <>
-            {loading ? <Preloader/> : <Login login={() => {loginByPass()}} error={error}/>}
+            {loading ? <Preloader/> :
+                <Login login={() => loginByPass()} error={error}/>}
         </>
     )
 };

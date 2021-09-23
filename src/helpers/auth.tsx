@@ -80,7 +80,7 @@ class Auth {
                 } else {
                     this.loginError();
                 }
-            })
+            }).catch(() => this.serverError());
     }
 
     writeInfo(data: any){
