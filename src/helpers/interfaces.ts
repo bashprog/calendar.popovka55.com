@@ -7,8 +7,10 @@ export interface IUser {
 }
 
 export interface IComments {
+    _id: string;
     comment: string;
     author: IUser;
+    fly_id: string;
 }
 
 export interface DatesArray {

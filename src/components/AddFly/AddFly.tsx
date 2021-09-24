@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import "date-fns"
 
@@ -35,13 +35,13 @@ const useStyles = makeStyles((theme: Theme) =>
             display: "flex",
             justifyContent: "center"
         },
+        btn: {
+            margin: 20
+        },
         comment: {
             width: "95%",
             margin: "0 2.5%"
         },
-        btn: {
-            margin: 20
-        }
     }),
 );
 
@@ -136,7 +136,7 @@ const AddFly: React.FC<IProps> = ({planes, add}) => {
                     </TextField>
                 </Grid>
                 <Grid item xs={12} className={classes.gridItem}>
-                    <TextField id="comment" label="Комментарий" defaultValue={""} className={classes.comment}/>
+                    <TextField id={"comment"} variant="outlined" label="Комментарий" defaultValue={""} className={classes.comment}/>
                 </Grid>
                 <Grid item xs={12} className={classes.gridItem}>
                     <Button className={classes.btn} variant="contained" color={"primary"} onClick={add}>Добавить полет</Button>

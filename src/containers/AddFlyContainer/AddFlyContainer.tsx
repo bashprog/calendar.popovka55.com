@@ -9,6 +9,7 @@ import {authAtom} from "../../atoms";
 
 import { useMutation } from "react-apollo";
 import { addFly } from "../../gql/mutations/addFly";
+import {addComment} from "../../gql/mutations/addComment";
 
 function formatDate(date: string, time: string) {
     return `${date.slice(6,10)}-${date.slice(3,5)}-${date.slice(0,2)}T${time}:00.000Z`;
@@ -20,6 +21,7 @@ const AddFlyContainer: React.FC = () => {
     const planes = useQuery(getAllPlanes);
 
     const [addFlyMut, addFlyInfo] = useMutation(addFly);
+    const [addCommentMut, addCommentInfo] = useMutation(addComment);
 
     const add = (): void => {
         let date = (document.getElementById("date") as HTMLInputElement).value;
@@ -38,7 +40,10 @@ const AddFlyContainer: React.FC = () => {
         };
 
         addFlyMut({variables: {author_id: obj.author_id, plane_id: obj.plane_id, date: obj.date, duration: obj.duration}})
-            .then(res => console.log(res))
+            .then(({data}) => {
+                console.log(comment, auth._id, data.addFly._id);
+                addCommentMut({variables: {comment: comment, author_id: auth._id, fly_id: data.addFly._id}}).then(res => console.log(res));
+            })
             .catch(e => console.log(e));
 
         console.log(obj)
