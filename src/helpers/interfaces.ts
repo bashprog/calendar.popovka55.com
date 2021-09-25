@@ -14,9 +14,10 @@ export interface IComments {
 }
 
 export interface DatesArray {
-    id: string;
+    _id: string;
     date: string;
     duration: number;
+    plane: {_id: string; name: string};
     author: IUser;
     comments?: IComments[];
 }

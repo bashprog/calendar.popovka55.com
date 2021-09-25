@@ -36,14 +36,19 @@ const compareArray = (array: DatesArray[] | any) => {
     }
 
     let comparedArray = [...array].map(val => {
-        if (isValidDate(new Date(val?.date))) {
-            val.date = new Date(val?.date);
+        if (isValidDate(new Date(+val?.date))) {
+            val.date = new Date(+val?.date);
             return val;
         } else {
-            console.log("Error. arg have no date field ");
+            console.log("Error. Arg have no date field ");
             return null;
         }
     });
+
+    comparedArray.filter(n => n); // remove all nulls
+
+    if (!comparedArray[0]?.date)
+        return null;
 
     comparedArray.sort(compare);
 
@@ -56,7 +61,7 @@ const compareArray = (array: DatesArray[] | any) => {
 };
 
 const formattingArray = (array: DatesArray[] | any): IFormattingDates[] | undefined => {
-    if (!Array.isArray(array) || !array) {
+    if (!Array.isArray(array) || !array || !array.length) {
         console.log("Error. Arg isn't array");
         return undefined;
     }
@@ -91,5 +96,9 @@ const formattingArray = (array: DatesArray[] | any): IFormattingDates[] | undefi
 
 export const comparedAndFormattingDates = (dates: DatesArray | any) => {
     let comparedArray = compareArray(dates);
-    return formattingArray(comparedArray);
+    if (comparedArray)
+        return formattingArray(comparedArray);
+
+    return undefined
+
 };

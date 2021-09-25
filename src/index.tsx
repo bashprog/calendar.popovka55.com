@@ -21,6 +21,7 @@ import {
 import ProtectedRoute from "./helpers/ProtectedRoute";
 
 import {getCookie, setCookie, deleteCookie} from "./helpers/cookie";
+import "./helpers/prototypes";
 
 import LoginContainer from "./containers/LoginContainer/LoginContainer";
 import ScheduleContainer from "./containers/ScheduleContainer/ScheduleContainer";

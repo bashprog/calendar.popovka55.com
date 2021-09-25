@@ -33,7 +33,7 @@ const CardContainer: React.FC<IProps> = ({array}) => {
                 {array && array.map((val: any, key: any) => (
                     <React.Fragment key={key}>
                         <CardItem day={val.day} />
-                        {val.array && val.array.map((value: any) => <CardItem item={value} key={value.id} />)}
+                        {val.array && val.array.map((value: any) => <CardItem item={value} key={value._id} />)}
                     </React.Fragment>
                 ))}
             </Grid>
