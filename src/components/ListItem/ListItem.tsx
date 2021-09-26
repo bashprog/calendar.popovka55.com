@@ -5,6 +5,8 @@ import {DatesArray} from "../../helpers/interfaces";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import Grid from '@material-ui/core/Grid';
 
+import {useHistory} from "react-router-dom";
+
 import CreateIcon from '@material-ui/icons/Create';
 import ClearIcon from '@material-ui/icons/Clear';
 
@@ -80,6 +82,13 @@ const ListItem: React.FC<ListItemsProps> = ({day, item}) => {
         return text.slice(0, chars) + (text.length > chars ? "..." : "");
     };
 
+    const history = useHistory();
+
+    const changeFlyLink = (): void => {
+        if (item)
+            history.push(`/changefly/${item._id}`)
+    };
+
     return(
         <>
             {day ?
@@ -98,7 +107,7 @@ const ListItem: React.FC<ListItemsProps> = ({day, item}) => {
                         {setChars("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, deserunt!")}
                     </Grid>
                     <Grid item xs={2} md={1} className={classes.lastCell}>
-                        <CreateIcon />
+                        <CreateIcon onClick={changeFlyLink}/>
                         <ClearIcon />
                     </Grid>
                 </Grid>

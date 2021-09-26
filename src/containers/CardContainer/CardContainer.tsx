@@ -21,6 +21,11 @@ const useStyles = makeStyles((theme: Theme) =>
                 justifyContent: "center"
             }
         },
+        header: {
+            fontWeight: 400,
+            display: "flex",
+            justifyContent: "center"
+        }
     })
 );
 
@@ -29,14 +34,14 @@ const CardContainer: React.FC<IProps> = ({array}) => {
 
     return (
         <section>
-            <Grid container className={classes.cardContainer}>
+            {array?.length ? <Grid container className={classes.cardContainer}>
                 {array && array.map((val: any, key: any) => (
                     <React.Fragment key={key}>
                         <CardItem day={val.day} />
                         {val.array && val.array.map((value: any) => <CardItem item={value} key={value._id} />)}
                     </React.Fragment>
                 ))}
-            </Grid>
+            </Grid> : <h3 className={classes.header}>Полетов нет</h3>}
         </section>
     )
 };

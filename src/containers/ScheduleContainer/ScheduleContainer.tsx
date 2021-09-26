@@ -6,17 +6,13 @@ import {comparedAndFormattingDates} from "../../helpers/compareAndFormattingDate
 
 import {useQuery} from "react-apollo";
 import {getDailyFlys} from "../../gql/queries/getDailyFlys";
+import {getWeeklyFlys} from "../../gql/queries/getWeeklyFlys";
 import {getTodayISO} from "../../helpers/getTodayISO";
 
 const ScheduleContainer = () => {
-    const daily = useQuery(getDailyFlys, {variables: {date: getTodayISO()}});
+    const daily = useQuery(getWeeklyFlys, {variables: {date: getTodayISO()}});
 
-    console.log(daily?.data?.getDailyFlys);
-
-    let list = undefined;
-
-    if (daily?.data?.getDailyFlys)
-        list = comparedAndFormattingDates(daily?.data?.getDailyFlys);
+    let list: any = comparedAndFormattingDates(daily?.data?.getWeeklyFlys);
 
     return (
         <>

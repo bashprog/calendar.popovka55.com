@@ -75,7 +75,7 @@ const CardItem: React.FC<IProps> = ({day, item}) => {
                                 {item?.duration} минут
                             </Typography>
                             <Typography variant="body2" component="p">
-                                Самолет
+                                {item?.plane.name}
                             </Typography>
                             <Typography variant="body2" component="p">
                                 {item?.author?.name}

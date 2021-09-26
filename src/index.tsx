@@ -31,6 +31,7 @@ import LogOut from "./containers/LogOut/LogOut"
 import {useAtom} from "jotai";
 import {authAtom} from "./atoms";
 import AddFlyContainer from "./containers/AddFlyContainer/AddFlyContainer";
+import ChangeFlyContainer from "./containers/ChangeFlyContainer/ChangeFlyContainer";
 
 const App = () => {
     const [auth, updateAuth] = useAtom(authAtom);
@@ -52,11 +53,12 @@ const App = () => {
                         <NavBar/>
                     </Route>
                     <Switch>
-                        <ProtectedRoute path={"/"} exact component={<ScheduleContainer/>}/>
-                        <ProtectedRoute path={"/addfly"} exact component={<AddFlyContainer/>}/>
                         <Route path={"/login"} exact>
                             <LoginContainer/>
                         </Route>
+                        <ProtectedRoute path={"/"} exact component={<ScheduleContainer/>}/>
+                        <ProtectedRoute path={"/addfly"} exact component={<AddFlyContainer/>}/>
+                        <ProtectedRoute path={"/changefly/:id"} exact component={<ChangeFlyContainer/>}/>
                     </Switch>
                     <ProtectedRoute path={"/logout"} exact component={<LogOut/>}/>
                 </Provider>

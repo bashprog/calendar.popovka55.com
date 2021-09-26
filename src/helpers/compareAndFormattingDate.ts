@@ -35,9 +35,15 @@ const compareArray = (array: DatesArray[] | any) => {
         return null;
     }
 
-    let comparedArray = [...array].map(val => {
-        if (isValidDate(new Date(+val?.date))) {
-            val.date = new Date(+val?.date);
+    let some = array.map(val => {
+        if (val.date == +val.date)
+            val.date = new Date(+val.date);
+        return val;
+    }); // Temp fix (If dates in ISO format +val.date === NaN and broke function) (Problem is in recall this function and i wanna sleep sorry)
+
+    let comparedArray = [...some].map(val => {
+        if (isValidDate(new Date(val?.date))) {
+            val.date = new Date(val?.date);
             return val;
         } else {
             console.log("Error. Arg have no date field ");
@@ -95,10 +101,14 @@ const formattingArray = (array: DatesArray[] | any): IFormattingDates[] | undefi
 };
 
 export const comparedAndFormattingDates = (dates: DatesArray | any) => {
-    let comparedArray = compareArray(dates);
-    if (comparedArray)
-        return formattingArray(comparedArray);
-
-    return undefined
-
+    if (Array.isArray(dates) && !dates[0].day){
+        let array = [... dates];
+        console.log("dates", dates);
+        console.log("array", array);
+        let comparedArray = compareArray(array);
+        if (comparedArray)
+            return formattingArray(comparedArray);
+    } else {
+        return dates;
+    }
 };
