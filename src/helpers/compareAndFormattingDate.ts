@@ -84,7 +84,7 @@ const formattingArray = (array: DatesArray[] | any): IFormattingDates[] | undefi
 
     daysArray.forEach(val => {
         let obj: IFormattingDates = {
-            day: `${+val.slice(8, 10)} ${monthArray[+val.slice(5,7)]} ${val.slice(0, 4)}`,
+            day: `${+val.slice(8, 10)} ${monthArray[+val.slice(5,7) - 1]} ${val.slice(0, 4)}`,
             array: []
         };
 
@@ -103,8 +103,6 @@ const formattingArray = (array: DatesArray[] | any): IFormattingDates[] | undefi
 export const comparedAndFormattingDates = (dates: DatesArray | any) => {
     if (Array.isArray(dates) && !dates[0].day){
         let array = [... dates];
-        console.log("dates", dates);
-        console.log("array", array);
         let comparedArray = compareArray(array);
         if (comparedArray)
             return formattingArray(comparedArray);

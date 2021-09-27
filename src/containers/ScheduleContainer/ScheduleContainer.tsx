@@ -8,6 +8,7 @@ import {useQuery} from "react-apollo";
 import {getDailyFlys} from "../../gql/queries/getDailyFlys";
 import {getWeeklyFlys} from "../../gql/queries/getWeeklyFlys";
 import {getTodayISO} from "../../helpers/getTodayISO";
+import Preloader from "../../components/Preloader/Preloader";
 
 const ScheduleContainer = () => {
     const daily = useQuery(getWeeklyFlys, {variables: {date: getTodayISO()}});
@@ -16,7 +17,7 @@ const ScheduleContainer = () => {
 
     return (
         <>
-            <Schedule array={list}/>
+            {daily.loading ? <Preloader/> : <Schedule array={list}/>}
         </>
     )
 };
