@@ -13,11 +13,15 @@ import Preloader from "../../components/Preloader/Preloader";
 const ScheduleContainer = () => {
     const daily = useQuery(getWeeklyFlys, {variables: {date: getTodayISO()}});
 
+    useEffect(() => {
+       daily.refetch();
+    });
+
     let list: any = comparedAndFormattingDates(daily?.data?.getWeeklyFlys);
 
     return (
         <>
-            {daily.loading ? <Preloader/> : <Schedule array={list}/>}
+            {daily.loading ? <Preloader/> : <Schedule array={list} refetch={daily.refetch}/>}
         </>
     )
 };

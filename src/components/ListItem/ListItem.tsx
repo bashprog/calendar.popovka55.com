@@ -10,9 +10,13 @@ import {useHistory} from "react-router-dom";
 import CreateIcon from '@material-ui/icons/Create';
 import ClearIcon from '@material-ui/icons/Clear';
 
+import {useMutation} from "react-apollo";
+import {deleteFly} from "../../gql/mutations/deleteFly";
+
 interface ListItemsProps {
     day?: string;
     item?: DatesArray;
+    refetch?: () => void
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -53,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) =>
         }
     }));
 
-const ListItem: React.FC<ListItemsProps> = ({day, item}) => {
+const ListItem: React.FC<ListItemsProps> = ({day, item, refetch}) => {
     const classes = useStyles();
 
     const getDiapason = (item: DatesArray) => {
@@ -89,6 +93,8 @@ const ListItem: React.FC<ListItemsProps> = ({day, item}) => {
             history.push(`/changefly/${item._id}`)
     };
 
+    const [deleteFlyById, deleteInfo] = useMutation(deleteFly);
+
     return(
         <>
             {day ?
@@ -108,7 +114,7 @@ const ListItem: React.FC<ListItemsProps> = ({day, item}) => {
                     </Grid>
                     <Grid item xs={2} md={1} className={classes.lastCell}>
                         <CreateIcon onClick={changeFlyLink}/>
-                        <ClearIcon />
+                        <ClearIcon onClick={() => deleteFlyById({variables: {fly_id: item?._id}}).then(refetch)}/>
                     </Grid>
                 </Grid>
             }

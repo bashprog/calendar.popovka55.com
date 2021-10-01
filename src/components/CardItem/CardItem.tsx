@@ -11,10 +11,13 @@ import CreateIcon from '@material-ui/icons/Create';
 import ClearIcon from '@material-ui/icons/Clear';
 
 import {Link, useHistory} from "react-router-dom";
+import {useMutation} from "react-apollo";
+import {deleteFly} from "../../gql/mutations/deleteFly";
 
 interface IProps {
     day?: string;
     item?: DatesArray;
+    refetch?: () => void
 }
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -48,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     }
 }));
 
-const CardItem: React.FC<IProps> = ({day, item}) => {
+const CardItem: React.FC<IProps> = ({day, item, refetch}) => {
     const classes = useStyles();
 
     const history = useHistory();
@@ -57,6 +60,10 @@ const CardItem: React.FC<IProps> = ({day, item}) => {
         if (item)
             history.push(`/changefly/${item._id}`)
     };
+
+    const [deleteFlyById, deleteInfo] = useMutation(deleteFly);
+
+    console.log(item);
 
     return (
         <>
@@ -82,7 +89,7 @@ const CardItem: React.FC<IProps> = ({day, item}) => {
                             </Typography>
                             <div className={classes.controlBox}>
                                 <CreateIcon onClick={changeFlyLink}/>
-                                <ClearIcon />
+                                <ClearIcon onClick={() => deleteFlyById({variables: {fly_id: item?._id}}).then(refetch)}/>
                             </div>
                         </CardContent>
                     </Card>

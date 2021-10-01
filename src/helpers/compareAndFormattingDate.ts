@@ -101,7 +101,10 @@ const formattingArray = (array: DatesArray[] | any): IFormattingDates[] | undefi
 };
 
 export const comparedAndFormattingDates = (dates: DatesArray | any) => {
-    if (Array.isArray(dates) && !dates[0].day){
+    if (dates == undefined)
+        return undefined;
+
+    if (Array.isArray(dates) && !dates[0]?.day){
         let array = [... dates];
         let comparedArray = compareArray(array);
         if (comparedArray)

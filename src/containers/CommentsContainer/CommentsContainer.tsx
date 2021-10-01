@@ -1,9 +1,14 @@
 import React from "react";
 import Comments from "../../components/Comments/Comments";
+import {IComments} from "../../helpers/interfaces";
 
-const CommentsContainer: React.FC = () => {
+interface IProps {
+    comments?: IComments[]
+}
+
+const CommentsContainer: React.FC<IProps> = ({comments}) => {
     return(
-        <Comments/>
+        <Comments comments={comments}/>
     )
 };
 

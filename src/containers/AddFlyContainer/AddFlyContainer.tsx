@@ -41,12 +41,10 @@ const AddFlyContainer: React.FC = () => {
 
         addFlyMut({variables: {author_id: obj.author_id, plane_id: obj.plane_id, date: obj.date, duration: obj.duration}})
             .then(({data}) => {
-                console.log(comment, auth._id, data.addFly._id);
-                addCommentMut({variables: {comment: comment, author_id: auth._id, fly_id: data.addFly._id}}).then(res => console.log(res));
+                if (comment)
+                    addCommentMut({variables: {comment: comment, author_id: auth._id, fly_id: data.addFly._id}}).then(res => console.log(res));
             })
             .catch(e => console.log(e));
-
-        console.log(obj)
     };
 
     return(

@@ -9,6 +9,7 @@ import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
+import CommentsContainer from "../../containers/CommentsContainer/CommentsContainer";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -49,13 +50,13 @@ interface IProps {
 const ChangeFly: React.FC<IProps> = ({fly, planes}) => {
     const classes = useStyles();
 
-    console.log(fly);
-
     const [selectedDate, setSelectedDate] = React.useState<Date | any>(new Date(+fly?.date));
 
     const handleDateChange = (date: Date | null) => {
         setSelectedDate(date);
     };
+
+    console.log(fly)
 
     const [currency, setCurrency] = React.useState<string | null>(null);
 
@@ -133,10 +134,7 @@ const ChangeFly: React.FC<IProps> = ({fly, planes}) => {
                         </MenuItem>}
                     </TextField>
                 </Grid>
-                <Grid item xs={12} className={classes.gridItem}>
-                    <TextField id={"comment"} variant="outlined" label="Комментарий" defaultValue={""}
-                               className={classes.comment}/>
-                </Grid>
+                <CommentsContainer comments={fly?.comments}/>
                 <Grid item xs={12} className={classes.gridItem}>
                     <Button className={classes.btn} variant="contained" color={"primary"}>Добавить полет</Button>
                 </Grid>

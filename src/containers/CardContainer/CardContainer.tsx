@@ -8,7 +8,8 @@ import {createStyles, makeStyles, Theme} from "@material-ui/core";
 import CardItem from "../../components/CardItem/CardItem";
 
 interface IProps {
-    array: IFormattingDates[] | undefined
+    array?: IFormattingDates[];
+    refetch: () => void
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-const CardContainer: React.FC<IProps> = ({array}) => {
+const CardContainer: React.FC<IProps> = ({array, refetch}) => {
     const classes = useStyles();
 
     return (
@@ -38,7 +39,7 @@ const CardContainer: React.FC<IProps> = ({array}) => {
                 {array && array.map((val: any, key: any) => (
                     <React.Fragment key={key}>
                         <CardItem day={val.day} />
-                        {val.array && val.array.map((value: any) => <CardItem item={value} key={value._id} />)}
+                        {val.array && val.array.map((value: any) => <CardItem item={value} key={value._id} refetch={refetch}/>)}
                     </React.Fragment>
                 ))}
             </Grid> : <h3 className={classes.header}>Полетов нет</h3>}

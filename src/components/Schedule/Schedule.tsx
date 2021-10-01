@@ -8,15 +8,16 @@ import {tableViewAtom} from "../../atoms";
 import CardContainer from "../../containers/CardContainer/CardContainer";
 
 interface IProps {
-    array: IFormattingDates[] | undefined
+    array?: IFormattingDates[];
+    refetch: () => void
 }
 
-const Schedule: React.FC<IProps> = ({array}) => {
+const Schedule: React.FC<IProps> = ({array, refetch}) => {
     const [tableView, toggle] = useAtom(tableViewAtom);
 
     return (
         <section>
-            {tableView ? <ListContainer array={array} /> : <CardContainer array={array}/>}
+            {tableView ? <ListContainer array={array} refetch={refetch}/> : <CardContainer array={array} refetch={refetch}/>}
         </section>
     )
 };

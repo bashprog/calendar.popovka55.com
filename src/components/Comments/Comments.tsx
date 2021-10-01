@@ -42,6 +42,9 @@ const useStyles = makeStyles((theme: Theme) =>
             height: 28,
             margin: 4,
         },
+        active: {
+            color: "black"
+        }
     }),
 );
 
@@ -62,21 +65,22 @@ const Comments: React.FC<IProps> = ({comments}) => {
             <Grid item xs={12} className={classes.gridItem}>
                 <Paper component="form" className={classes.root} variant={"outlined"}>
                     <InputBase
+                        id={"new-comment"}
                         className={classes.input}
-                        placeholder="Коментарий"
-                        inputProps={{ 'aria-label': 'search google maps' }}
+                        placeholder="Добавить коментарий"
+                        inputProps={{ 'aria-label': 'comment' }}
                     />
                     <IconButton className={classes.iconButton} aria-label="add">
-                        <AddIcon />
+                        <AddIcon className={classes.active}/>
                     </IconButton>
-                    <Divider className={classes.divider} orientation="vertical" />
-                    <IconButton className={classes.iconButton} aria-label="change">
-                        <CreateIcon />
-                    </IconButton>
-                    <Divider className={classes.divider} orientation="vertical" />
-                    <IconButton className={classes.iconButton} aria-label="directions">
-                        <ClearIcon />
-                    </IconButton>
+                    {/*<Divider className={classes.divider} orientation="vertical" />*/}
+                    {/*<IconButton className={classes.iconButton} aria-label="change">*/}
+                    {/*    <CreateIcon />*/}
+                    {/*</IconButton>*/}
+                    {/*<Divider className={classes.divider} orientation="vertical" />*/}
+                    {/*<IconButton className={classes.iconButton} aria-label="directions">*/}
+                    {/*    <ClearIcon />*/}
+                    {/*</IconButton>*/}
                 </Paper>
             </Grid>
         </>
