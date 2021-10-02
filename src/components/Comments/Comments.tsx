@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         gridItem: {
             display: "flex",
-            justifyContent: "center"
+            justifyContent: "center",
+            margin: "20px 0"
         },
         comment: {
             width: "95%",
@@ -49,17 +50,42 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface IProps {
-    comments?: IComments[]
+    comments?: IComments[];
+    addComment: (newComment: any) => void;
+    deleteComment: (key: number) => void;
 }
 
-const Comments: React.FC<IProps> = ({comments}) => {
+const Comments: React.FC<IProps> = ({comments, addComment, deleteComment}) => {
     const classes = useStyles();
+
+    console.log(comments);
+
+    const add = () => {
+        let item = document.getElementById('new-comment') as HTMLInputElement;
+
+        if (item.value) {
+            addComment(item);
+            item.value = "";
+        }
+    };
 
     return(
         <>
             {comments && comments.map((val, key) => (
-                <Grid key={val._id} item xs={12} className={classes.gridItem}>
-                    <TextField variant="outlined" label="Комментарий" defaultValue={val.comment} className={classes.comment}/>
+                <Grid item xs={12} key={key} className={classes.gridItem}>
+                    <Paper className={classes.root} variant={"outlined"}>
+                        <InputBase
+                            id={""}
+                            className={classes.input}
+                            placeholder="Добавить коментарий"
+                            inputProps={{ 'aria-label': 'comment' }}
+                            value={val.comment}
+                            disabled
+                        />
+                        <IconButton className={classes.iconButton} onClick={() => deleteComment(key)} aria-label="directions">
+                            <ClearIcon />
+                        </IconButton>
+                    </Paper>
                 </Grid>
             ))}
             <Grid item xs={12} className={classes.gridItem}>
@@ -70,17 +96,9 @@ const Comments: React.FC<IProps> = ({comments}) => {
                         placeholder="Добавить коментарий"
                         inputProps={{ 'aria-label': 'comment' }}
                     />
-                    <IconButton className={classes.iconButton} aria-label="add">
+                    <IconButton className={classes.iconButton} onClick={() => {add()}} aria-label="add">
                         <AddIcon className={classes.active}/>
                     </IconButton>
-                    {/*<Divider className={classes.divider} orientation="vertical" />*/}
-                    {/*<IconButton className={classes.iconButton} aria-label="change">*/}
-                    {/*    <CreateIcon />*/}
-                    {/*</IconButton>*/}
-                    {/*<Divider className={classes.divider} orientation="vertical" />*/}
-                    {/*<IconButton className={classes.iconButton} aria-label="directions">*/}
-                    {/*    <ClearIcon />*/}
-                    {/*</IconButton>*/}
                 </Paper>
             </Grid>
         </>

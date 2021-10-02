@@ -56,7 +56,7 @@ const ChangeFly: React.FC<IProps> = ({fly, planes}) => {
         setSelectedDate(date);
     };
 
-    console.log(fly)
+    console.log(fly);
 
     const [currency, setCurrency] = React.useState<string | null>(null);
 
