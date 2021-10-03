@@ -134,7 +134,7 @@ const ChangeFly: React.FC<IProps> = ({fly, planes}) => {
                         </MenuItem>}
                     </TextField>
                 </Grid>
-                <CommentsContainer comments={fly?.comments}/>
+                <CommentsContainer comments={fly?.comments} flyId={fly?._id}/>
                 <Grid item xs={12} className={classes.gridItem}>
                     <Button className={classes.btn} variant="contained" color={"primary"}>Добавить полет</Button>
                 </Grid>

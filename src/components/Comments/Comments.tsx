@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
 interface IProps {
     comments?: IComments[];
     addComment: (newComment: any) => void;
-    deleteComment: (key: number) => void;
+    deleteComment: (id: string) => void;
 }
 
 const Comments: React.FC<IProps> = ({comments, addComment, deleteComment}) => {
@@ -80,9 +80,8 @@ const Comments: React.FC<IProps> = ({comments, addComment, deleteComment}) => {
                             placeholder="Добавить коментарий"
                             inputProps={{ 'aria-label': 'comment' }}
                             value={val.comment}
-                            disabled
                         />
-                        <IconButton className={classes.iconButton} onClick={() => deleteComment(key)} aria-label="directions">
+                        <IconButton className={classes.iconButton} onClick={() => deleteComment(val._id)} aria-label="directions">
                             <ClearIcon />
                         </IconButton>
                     </Paper>

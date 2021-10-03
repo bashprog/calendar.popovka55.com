@@ -5,40 +5,53 @@ import {IComments} from "../../helpers/interfaces";
 import {useAtom} from "jotai";
 import {authAtom} from "../../atoms";
 
+import {useMutation} from "react-apollo";
+import {addComment} from "../../gql/mutations/addComment";
+import {deleteComment} from "../../gql/mutations/deleteComment";
+
+import Preloader from "../../components/Preloader/Preloader";
+
 interface IProps {
-    comments?: IComments[]
+    comments?: IComments[],
+    flyId: string
 }
 
-const CommentsContainer: React.FC<IProps> = ({comments}) => {
+const CommentsContainer: React.FC<IProps> = ({comments, flyId}) => {
     const [auth] = useAtom(authAtom);
 
     const [commentsArray, changeCommentsArray] = useState(comments);
 
-    const addComment = (newComment: HTMLInputElement) => {
-        let array: any = [];
-        if (commentsArray)
-            array = [... commentsArray];
+    const [addCommentMut, commentInfo] = useMutation(addComment);
 
-        let comment = {
-            author_id: auth._id,
-            comment: newComment.value
-        };
+    const [deleteCommentMut, deleteInfo] = useMutation(deleteComment);
 
-        changeCommentsArray([... array, comment]);
+    const handleAddComment = (newComment: HTMLInputElement) => {
+        addCommentMut({variables: {comment: newComment.value, author_id: auth._id, fly_id: flyId}}).then(res => {
+            if (Array.isArray(commentsArray)) {
+                changeCommentsArray([...commentsArray, res.data?.addComment])
+            } else {
+                changeCommentsArray([...res.data?.addComment])
+            }
+        });
     };
 
-    const deleteComment = (key: number) => {
-        let array: any = [];
-        if (commentsArray)
-            array = [... commentsArray];
-
-        array.splice(key, 1);
-
-        changeCommentsArray(array);
+    const handleDeleteComment = (id: string) => {
+        deleteCommentMut({variables: {comment_id: id}}).then(res => {
+            if (Array.isArray(commentsArray)) {
+                let array = [... commentsArray];
+                let i = array.findIndex(e => e._id == id);
+                array.splice(i, 1);
+                Array.isArray(array) ? changeCommentsArray(array) : changeCommentsArray([]);
+            }
+        })
     };
 
-    return(
-        <Comments comments={commentsArray} addComment={addComment} deleteComment={deleteComment}/>
+    return (
+        <>
+            {(commentInfo.loading || deleteInfo.loading) ? <Preloader/> :
+                <Comments comments={commentsArray} addComment={handleAddComment} deleteComment={handleDeleteComment}/>
+            }
+        </>
     )
 };
 
