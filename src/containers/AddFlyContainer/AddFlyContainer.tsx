@@ -17,7 +17,7 @@ function formatDate(date: string, time: string) {
 
 const AddFlyContainer: React.FC = () => {
     const [auth] = useAtom(authAtom);
-
+    console.log(auth);
     const planes = useQuery(getAllPlanes);
 
     const [addFlyMut, addFlyInfo] = useMutation(addFly);
@@ -49,7 +49,7 @@ const AddFlyContainer: React.FC = () => {
 
     return(
         <>
-            {planes?.loading ? <Preloader/> : <AddFly add={() => add()} planes={planes?.data?.getAllPlanes}/>}
+            {(planes?.loading || addFlyInfo.loading || addCommentInfo.loading) ? <Preloader/> : <AddFly add={() => add()} planes={planes?.data?.getAllPlanes}/>}
         </>
     )
 };

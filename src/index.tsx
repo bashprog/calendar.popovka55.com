@@ -32,6 +32,7 @@ import {useAtom} from "jotai";
 import {authAtom} from "./atoms";
 import AddFlyContainer from "./containers/AddFlyContainer/AddFlyContainer";
 import ChangeFlyContainer from "./containers/ChangeFlyContainer/ChangeFlyContainer";
+import SettingsContainer from "./containers/SettingsContainer/SettingsContainer";
 
 const App = () => {
     const [auth, updateAuth] = useAtom(authAtom);
@@ -59,6 +60,7 @@ const App = () => {
                         <ProtectedRoute path={"/"} exact component={<ScheduleContainer/>}/>
                         <ProtectedRoute path={"/addfly"} exact component={<AddFlyContainer/>}/>
                         <ProtectedRoute path={"/changefly/:id"} exact component={<ChangeFlyContainer/>}/>
+                        <ProtectedRoute path={"/settings"} exact component={<SettingsContainer />}/>
                     </Switch>
                     <ProtectedRoute path={"/logout"} exact component={<LogOut/>}/>
                 </Provider>

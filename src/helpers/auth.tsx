@@ -8,7 +8,9 @@ class Auth {
     _id: string;
     name: string;
     email: string;
+    password: string;
     token: string;
+    role?: string;
 
     constructor() {
         this.authenticated = false;
@@ -18,7 +20,9 @@ class Auth {
         this._id = "";
         this.name = "";
         this.email = "";
+        this.password = "";
         this.token = "";
+        this.role = undefined;
     }
 
     loginByToken(token: string) {
@@ -35,6 +39,8 @@ class Auth {
                             name
                             email
                             token
+                            role
+                            password
                         }}
                     `,
                 variables: {
@@ -65,6 +71,8 @@ class Auth {
                             name
                             email
                             token
+                            role
+                            password
                         }}
                     `,
                 variables: {
@@ -84,7 +92,7 @@ class Auth {
     }
 
     writeInfo(data: any){
-        const {_id, name, email, token} = data;
+        const {_id, name, email, password, token, role} = data;
 
         if (_id) {
             this._id = _id
@@ -118,6 +126,14 @@ class Auth {
             return;
         }
 
+        if (role) {
+            this.role = role;
+        }
+
+        if (password) {
+            this.password = password;
+        }
+
         this.error = false;
         this.errorMessage = "";
         this.authenticated = true;
@@ -142,6 +158,7 @@ class Auth {
         this.name = "";
         this.email = "";
         this.token = "";
+        this.role = undefined;
 
         deleteCookie("token");
     }

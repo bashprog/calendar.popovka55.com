@@ -49,17 +49,15 @@ const ChangeFlyContainer: React.FC = () => {
                 date: obj.date,
                 duration: obj.duration
             }
-        })).then(res => console.log(res));
+        }));
     };
 
     return (
         <>
-            {(fly?.data?.getFlyById && planes) ?
-                <>
-                    {changeInfo.loading ? <Preloader/> : <ChangeFly save={handleSaveChanges} fly={fly?.data?.getFlyById}
-                                                                    planes={planes?.data?.getAllPlanes}/>}
-                </>
-                : null}
+            <>
+                {(changeInfo.loading || fly.loading || planes.loading) ? <Preloader/> : <ChangeFly save={handleSaveChanges} fly={fly?.data?.getFlyById}
+                                                                                                   planes={planes?.data?.getAllPlanes}/>}
+            </>
         </>
     )
 };

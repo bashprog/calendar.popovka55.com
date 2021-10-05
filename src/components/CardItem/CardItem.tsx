@@ -13,6 +13,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import {Link, useHistory} from "react-router-dom";
 import {useMutation} from "react-apollo";
 import {deleteFly} from "../../gql/mutations/deleteFly";
+import Preloader from "../Preloader/Preloader";
 
 interface IProps {
     day?: string;
@@ -63,37 +64,40 @@ const CardItem: React.FC<IProps> = ({day, item, refetch}) => {
 
     const [deleteFlyById, deleteInfo] = useMutation(deleteFly);
 
-    console.log(item);
-
     return (
         <>
-            {day ?
-                <div className={classes.day}>
-                    <h3>{day}</h3>
-                </div>
-                :
-                <Grid item xs={10} sm={6} md={4} lg={3} className={classes.container}>
-                    <Card className={classes.card}>
-                        <CardContent>
-                            <Typography gutterBottom>
-                                {item?.date.slice(11,16)}
-                            </Typography>
-                            <Typography color="textSecondary" gutterBottom>
-                                {item?.duration} минут
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                {item?.plane.name}
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                                {item?.author?.name}
-                            </Typography>
-                            <div className={classes.controlBox}>
-                                <CreateIcon onClick={changeFlyLink}/>
-                                <ClearIcon onClick={() => deleteFlyById({variables: {fly_id: item?._id}}).then(refetch)}/>
-                            </div>
-                        </CardContent>
-                    </Card>
-                </Grid>
+            {deleteInfo.loading ? <Preloader/> :
+                <>
+                    {day ?
+                        <div className={classes.day}>
+                            <h3>{day}</h3>
+                        </div>
+                        :
+                        <Grid item xs={10} sm={6} md={4} lg={3} className={classes.container}>
+                            <Card className={classes.card}>
+                                <CardContent>
+                                    <Typography gutterBottom>
+                                        {item?.date.slice(11, 16)}
+                                    </Typography>
+                                    <Typography color="textSecondary" gutterBottom>
+                                        {item?.duration} минут
+                                    </Typography>
+                                    <Typography variant="body2" component="p">
+                                        {item?.plane.name}
+                                    </Typography>
+                                    <Typography variant="body2" component="p">
+                                        {item?.author?.name}
+                                    </Typography>
+                                    <div className={classes.controlBox}>
+                                        <CreateIcon onClick={changeFlyLink}/>
+                                        <ClearIcon
+                                            onClick={() => deleteFlyById({variables: {fly_id: item?._id}}).then(refetch)}/>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    }
+                </>
             }
         </>
     )
