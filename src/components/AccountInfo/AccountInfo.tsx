@@ -65,15 +65,15 @@ const AccountInfo: React.FC<IProps> = ({_id, role, name, email, password, save})
         <Grid container className={classes.container}>
             <h2 className={classes.header}>Настройки аккаунта</h2>
             <Grid container>
-                <Grid item xs={12} sm={6} md={4} className={classes.gridItem}>
+                <Grid item xs={12} sm={6} md={4} className={classes.gridItem} key={name}>
                     <TextField id="change-name" label="Имя" defaultValue={name} variant="outlined"
                                className={classes.textField}/>
                 </Grid>
-                <Grid item xs={12} sm={6} md={4} className={classes.gridItem}>
+                <Grid item xs={12} sm={6} md={4} className={classes.gridItem} key={email}>
                     <TextField id="change-email" label="E-mail" defaultValue={email} variant="outlined"
                                className={classes.textField}/>
                 </Grid>
-                <Grid item xs={12} sm={6} md={4} className={classes.gridItem}>
+                <Grid item xs={12} sm={6} md={4} className={classes.gridItem} key={password}>
                     <FormControl className={classes.textField} variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">Пароль</InputLabel>
                         <OutlinedInput
