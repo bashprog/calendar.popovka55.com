@@ -35,8 +35,8 @@ const AccountInfoContainer: React.FC = () => {
                 password: password
             }
         }).then((res) => {
-            console.log(res);
-            auth.loginByToken(auth.token).then(r => changeProps(res.data.updateUser));
+            auth.loginByToken(auth.token)
+                .then(r => changeProps(res.data.updateUser));
         })
     };
 
