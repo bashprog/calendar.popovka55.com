@@ -7,10 +7,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import AddIcon from '@material-ui/icons/Add';
 
-interface IProps {
-    planes?: { _id: string; name: string }[];
-}
-
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {
@@ -36,8 +32,13 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
+interface IProps {
+    planes?: { _id: string; name: string }[];
+    add: () => void;
+    handleDelete: (id: string) => void;
+}
 
-const PlanesSettings: React.FC<IProps> = ({planes}) => {
+const PlanesSettings: React.FC<IProps> = ({planes, add, handleDelete}) => {
     const classes = useStyles();
 
     return (
@@ -50,18 +51,19 @@ const PlanesSettings: React.FC<IProps> = ({planes}) => {
                         value={el.name}
                         disabled
                     />
-                    <IconButton aria-label="clear">
-                        <ClearIcon/>
+                    <IconButton aria-label="clear" onClick={() => handleDelete(el._id)}>
+                        <ClearIcon />
                     </IconButton>
                 </Paper>
             ))}
             <Paper className={classes.container} variant={"outlined"}>
                 <InputBase
+                    id={"new-plane"}
                     className={classes.color}
                     defaultValue={""}
                     placeholder={"Добавить самолет"}
                 />
-                <IconButton aria-label="add">
+                <IconButton aria-label="add" onClick={add}>
                     <AddIcon/>
                 </IconButton>
             </Paper>
