@@ -83,7 +83,7 @@ const CardItem: React.FC<IProps> = ({day, item, refetch}) => {
                                         {item?.duration} минут
                                     </Typography>
                                     <Typography variant="body2" component="p">
-                                        {item?.plane.name}
+                                        {item?.plane?.name || "Самолет удален"}
                                     </Typography>
                                     <Typography variant="body2" component="p">
                                         {item?.author?.name}

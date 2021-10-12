@@ -27,12 +27,14 @@ import LoginContainer from "./containers/LoginContainer/LoginContainer";
 import ScheduleContainer from "./containers/ScheduleContainer/ScheduleContainer";
 import NavBar from "./components/NavBar/NavBar";
 import LogOut from "./containers/LogOut/LogOut"
-
-import {useAtom} from "jotai";
-import {authAtom} from "./atoms";
 import AddFlyContainer from "./containers/AddFlyContainer/AddFlyContainer";
 import ChangeFlyContainer from "./containers/ChangeFlyContainer/ChangeFlyContainer";
 import SettingsContainer from "./containers/SettingsContainer/SettingsContainer";
+import HomeContainer from "./containers/HomeContainer/HomeContainer"
+
+import {useAtom} from "jotai";
+import {authAtom} from "./atoms";
+
 
 const App = () => {
     const [auth, updateAuth] = useAtom(authAtom);
@@ -57,7 +59,8 @@ const App = () => {
                         <Route path={"/login"} exact>
                             <LoginContainer/>
                         </Route>
-                        <ProtectedRoute path={"/"} exact component={<ScheduleContainer/>}/>
+                        <ProtectedRoute path={"/"} exact component={<HomeContainer/>}/>
+                        <ProtectedRoute path={"/schedule"} exact component={<ScheduleContainer/>}/>
                         <ProtectedRoute path={"/addfly"} exact component={<AddFlyContainer/>}/>
                         <ProtectedRoute path={"/changefly/:id"} exact component={<ChangeFlyContainer/>}/>
                         <ProtectedRoute path={"/settings"} exact component={<SettingsContainer />}/>

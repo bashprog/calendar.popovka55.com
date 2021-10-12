@@ -2,6 +2,7 @@ declare global {
     interface Date {
         addMinutes(m: number): Date;
         addHours(h: number): Date;
+        addWeek(): Date;
         isValid(): boolean;
     }
 }
@@ -13,6 +14,11 @@ Date.prototype.addMinutes = function (m: number) {
 
 Date.prototype.addHours = function (h: number) {
     this.setHours(this.getHours() + h);
+    return this;
+};
+
+Date.prototype.addWeek = function () {
+    this.setDate(this.getDate() + 7);
     return this;
 };
 

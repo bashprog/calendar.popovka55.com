@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const Schedule: React.FC<IProps> = ({array, refetch}) => {
-    const [tableView, toggle] = useAtom(tableViewAtom);
+    const [tableView] = useAtom(tableViewAtom);
 
     return (
         <section>

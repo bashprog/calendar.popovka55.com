@@ -1,27 +1,52 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 
 import Schedule from "../../components/Schedule/Schedule";
 
 import {comparedAndFormattingDates} from "../../helpers/compareAndFormattingDate";
 
 import {useQuery} from "react-apollo";
-import {getDailyFlys} from "../../gql/queries/getDailyFlys";
-import {getWeeklyFlys} from "../../gql/queries/getWeeklyFlys";
+import {getFlysByDate} from "../../gql/queries/getFlysByDate";
 import {getTodayISO} from "../../helpers/getTodayISO";
 import Preloader from "../../components/Preloader/Preloader";
+import SchedulePicker from "../../components/SchedulePicker/SchedulePicker";
+import {getStartDateISO} from "../../helpers/getStartDateISO";
 
 const ScheduleContainer = () => {
-    const daily = useQuery(getWeeklyFlys, {variables: {date: getTodayISO()}});
-
     useEffect(() => {
-       daily.refetch();
+        diapason.refetch();
     });
 
-    let list: any = comparedAndFormattingDates(daily?.data?.getWeeklyFlys);
+    const [from, changeFrom] = useState<Date | any>(new Date());
+    const [to, changeTo] = useState<Date | any>((new Date()).addWeek());
+
+    const handleFromChange = (date: Date | null) => {
+        changeFrom(date);
+    };
+
+    const handleToChange = (date: Date | null) => {
+        changeTo(date);
+    };
+
+    if (from.getTime() > to.getTime())
+        changeTo(from);
+
+    const diapason = useQuery(getFlysByDate, {variables: {from: getStartDateISO(from), to: getStartDateISO(to)}});
+
+    console.log(getStartDateISO(from), getStartDateISO(to));
+
+    let list: any = comparedAndFormattingDates(diapason?.data?.getFlysByDate);
+
+    const props = {
+        from: from,
+        to: to,
+        changeFrom: handleFromChange,
+        changeTo: handleToChange,
+    };
 
     return (
         <>
-            {daily.loading ? <Preloader/> : <Schedule array={list} refetch={daily.refetch}/>}
+            <SchedulePicker {... props}/>
+            {diapason.loading ? <Preloader/> : <Schedule array={list} refetch={diapason.refetch}/>}
         </>
     )
 };
