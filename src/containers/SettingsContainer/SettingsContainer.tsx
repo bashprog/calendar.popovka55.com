@@ -2,12 +2,14 @@ import React from "react";
 
 import AccountInfoContainer from "../AccountInfoContainer/AccountInfoContainer";
 import PlanesSettingsContainer from "../PlanesSettingsContainer/PlanesSettingsContainer";
+import UserSettingsContainer from "../UserSettingsContainer/UserSettingsContainer";
 
 import {useAtom} from "jotai";
 import {authAtom} from "../../atoms";
 
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -21,6 +23,11 @@ const useStyles = makeStyles((theme: Theme) =>
             display: "flex",
             justifyContent: "center"
         },
+        column: {
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+        }
     }),
 );
 
@@ -35,6 +42,9 @@ const SettingsContainer: React.FC = () => {
             <Grid container className={classes.container}>
                 <Grid item xs={12} sm={6} className={classes.gridItem}>
                     <PlanesSettingsContainer/>
+                </Grid>
+                <Grid item xs={12} sm={6} className={classes.column}>
+                    <UserSettingsContainer/>
                 </Grid>
             </Grid>
         </>
