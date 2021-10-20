@@ -37,10 +37,11 @@ const useStyles = makeStyles({
 });
 
 interface IProps {
-    users?: {_id: string, name: string, email: string}[]
+    users?: {_id: string, name: string, email: string}[];
+    deleteUser: (id: string) => void;
 }
 
-const UserSettings: React.FC<IProps> = ({users}) => {
+const UserSettings: React.FC<IProps> = ({users, deleteUser}) => {
     const classes = useStyles();
 
     return(
@@ -59,7 +60,7 @@ const UserSettings: React.FC<IProps> = ({users}) => {
                             {el.email}
                         </Typography>
                     </CardContent>
-                    <ClearIcon className={classes.clear}/>
+                    <ClearIcon className={classes.clear} onClick={() => {deleteUser(el._id)}}/>
                 </Card>
             ))}
             </>
