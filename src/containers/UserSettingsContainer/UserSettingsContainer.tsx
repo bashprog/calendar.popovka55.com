@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import UserSettings from "../../components/UserSettings/UserSettings";
 
@@ -9,6 +9,10 @@ import Preloader from "../../components/Preloader/Preloader";
 
 const UserSettingsContainer: React.FC = () => {
     const users = useQuery(getAllUsers);
+
+    useEffect(() => {
+        users.refetch();
+    })
 
     const [deleteUser, deleteInfo] = useMutation(deleteUserById);
 
