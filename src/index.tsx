@@ -30,7 +30,8 @@ import LogOut from "./containers/LogOut/LogOut"
 import AddFlyContainer from "./containers/AddFlyContainer/AddFlyContainer";
 import ChangeFlyContainer from "./containers/ChangeFlyContainer/ChangeFlyContainer";
 import SettingsContainer from "./containers/SettingsContainer/SettingsContainer";
-import HomeContainer from "./containers/HomeContainer/HomeContainer"
+import HomeContainer from "./containers/HomeContainer/HomeContainer";
+import AddUserContainer from "./containers/AddUserContainer/AddUserContainer";
 
 import {useAtom} from "jotai";
 import {authAtom} from "./atoms";
@@ -64,6 +65,7 @@ const App = () => {
                         <ProtectedRoute path={"/addfly"} exact component={<AddFlyContainer/>}/>
                         <ProtectedRoute path={"/changefly/:id"} exact component={<ChangeFlyContainer/>}/>
                         <ProtectedRoute path={"/settings"} exact component={<SettingsContainer />}/>
+                        <ProtectedRoute path={"/adduser"} exact component={<AddUserContainer />}/>
                     </Switch>
                     <ProtectedRoute path={"/logout"} exact component={<LogOut/>}/>
                 </Provider>

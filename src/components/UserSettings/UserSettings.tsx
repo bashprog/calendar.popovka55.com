@@ -1,10 +1,13 @@
 import React from "react";
 
+import {Link} from "react-router-dom"
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import ClearIcon from '@material-ui/icons/Clear';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 
 const useStyles = makeStyles({
     root: {
@@ -33,6 +36,13 @@ const useStyles = makeStyles({
         top: 16,
         right: 16,
         cursor: "pointer"
+    },
+    addLink: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 20,
+        boxSizing: "border-box"
     }
 });
 
@@ -63,6 +73,11 @@ const UserSettings: React.FC<IProps> = ({users, deleteUser}) => {
                     <ClearIcon className={classes.clear} onClick={() => {deleteUser(el._id)}}/>
                 </Card>
             ))}
+            <Card className={classes.root}>
+                <Link to={"/adduser"} className={classes.addLink}>
+                    <AddBoxIcon/> Добавить пользователя
+                </Link>
+            </Card>
             </>
     )
 };

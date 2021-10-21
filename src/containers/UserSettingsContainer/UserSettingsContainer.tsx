@@ -16,10 +16,11 @@ const UserSettingsContainer: React.FC = () => {
         deleteUser({variables: {_id: id}}).then(users.refetch).catch(err => console.log(err));
     }
 
-    return(
+    return (
         <>
-            {(users.loading || deleteInfo.loading) ? <Preloader/> : <UserSettings deleteUser={handleDeleteUserById} users={users?.data?.getAllUsers}/>}
-            </>
+            {(users.loading || deleteInfo.loading) ? <Preloader/> :
+                <UserSettings deleteUser={handleDeleteUserById} users={users?.data?.getAllUsers}/>}
+        </>
     )
 }
 
