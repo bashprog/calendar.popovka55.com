@@ -20,7 +20,7 @@ interface IProps {
 const DailyFlysContainer: React.FC<IProps> = ({date}) => {
     const [tableView] = useAtom(tableViewAtom);
 
-    const dailyFlys = useQuery(getDailyFlys, {variables: {date: date}})
+    const dailyFlys = useQuery(getDailyFlys, {variables: {date: getStartDateISO(date)}})
 
     let list: any = comparedAndFormattingDates(dailyFlys?.data?.getDailyFlys);
 
