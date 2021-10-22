@@ -54,6 +54,9 @@ const useStyles = makeStyles((theme: Theme) =>
                     color: "black"
                 },
             }
+        },
+        gray: {
+            color: "rgba(0, 0, 0, 0.54)"
         }
     }));
 
@@ -106,11 +109,16 @@ const ListItem: React.FC<ListItemsProps> = ({day, item, refetch}) => {
                     <Grid item xs={3} md={2} className={classes.rowCell}>
                         {item && getDiapason(item)}
                     </Grid>
-                    <Grid item xs={3} md={2} className={classes.rowCell}>
+                    <Grid item xs={2} md={2} className={classes.rowCell}>
                         {item?.author?.name}
                     </Grid>
+                    <Grid item xs={2} md={1} className={classes.rowCell}>
+                        {item?.plane?.name}
+                    </Grid>
                     <Grid item xs className={classes.rowCell}>
-                        {setChars("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, deserunt!")}
+                        {item?.comments?.length ? item?.comments?.map((el) => (
+                            <span key={el._id}> {setChars(`${el.comment}`)} /   </span>
+                        )) : <span className={classes.gray}>Нет комментариев</span>}
                     </Grid>
                     <Grid item xs={2} md={1} className={classes.lastCell}>
                         <CreateIcon onClick={changeFlyLink}/>
