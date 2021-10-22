@@ -46,12 +46,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface IProps {
-    planes?: {id: string; name: string; __typename?: any}[];
-    add: () => void
+    planes?: { id: string; name: string; __typename?: any }[];
+    add: () => void;
+    changeDate: (date: Date | any) => void;
+    date: Date | null;
 }
 
 
-const AddFly: React.FC<IProps> = ({planes, add}) => {
+const AddFly: React.FC<IProps> = ({planes, add, changeDate, date}) => {
     const classes = useStyles();
 
     const [selectedDate, setSelectedDate] = React.useState<Date | null>(new Date());
@@ -62,7 +64,7 @@ const AddFly: React.FC<IProps> = ({planes, add}) => {
 
     const [currency, setCurrency] = React.useState<string | null>(null);
 
-    if (!currency && planes){
+    if (!currency && planes) {
         setCurrency(planes[0].name)
     }
 
@@ -74,16 +76,16 @@ const AddFly: React.FC<IProps> = ({planes, add}) => {
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <Grid container className={classes.container}>
                 <Grid item xs={12} sm={6} md={4} className={classes.gridItem}>
-                        <KeyboardDatePicker
-                            disableToolbar={true}
-                            variant="inline"
-                            format="dd/MM/yyyy"
-                            margin="normal"
-                            id="date"
-                            label="Выберите дату"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                        />
+                    <KeyboardDatePicker
+                        disableToolbar={true}
+                        variant="inline"
+                        format="dd/MM/yyyy"
+                        margin="normal"
+                        id="date"
+                        label="Выберите дату"
+                        value={date}
+                        onChange={changeDate}
+                    />
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} className={classes.gridItem}>
                     <TextField
@@ -130,16 +132,18 @@ const AddFly: React.FC<IProps> = ({planes, add}) => {
                             <MenuItem key={option.name} value={option.name}>
                                 {option.name}
                             </MenuItem>
-                        )) : <MenuItem >
+                        )) : <MenuItem>
                             {""}
                         </MenuItem>}
                     </TextField>
                 </Grid>
                 <Grid item xs={12} className={classes.gridItem}>
-                    <TextField id={"comment"} variant="outlined" label="Комментарий" defaultValue={""} className={classes.comment}/>
+                    <TextField id={"comment"} variant="outlined" label="Комментарий" defaultValue={""}
+                               className={classes.comment}/>
                 </Grid>
                 <Grid item xs={12} className={classes.gridItem}>
-                    <Button className={classes.btn} variant="contained" color={"primary"} onClick={add}>Добавить полет</Button>
+                    <Button className={classes.btn} variant="contained" color={"primary"} onClick={add}>Добавить
+                        полет</Button>
                 </Grid>
             </Grid>
         </MuiPickersUtilsProvider>
