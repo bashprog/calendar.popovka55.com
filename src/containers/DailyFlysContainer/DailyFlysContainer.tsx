@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {comparedAndFormattingDates} from "../../helpers/compareAndFormattingDate";
 
@@ -19,6 +19,10 @@ interface IProps {
 
 const DailyFlysContainer: React.FC<IProps> = ({date}) => {
     const [tableView] = useAtom(tableViewAtom);
+
+    useEffect(() => {
+        dailyFlys.refetch();
+    })
 
     const dailyFlys = useQuery(getDailyFlys, {variables: {date: getStartDateISO(date)}})
 
