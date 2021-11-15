@@ -35,6 +35,7 @@ import AddUserContainer from "./containers/AddUserContainer/AddUserContainer";
 
 import {useAtom} from "jotai";
 import {authAtom} from "./atoms";
+import PopUpContainer from "./containers/PopUpContainer/PopUpContainer";
 
 
 const App = () => {
@@ -46,7 +47,7 @@ const App = () => {
 
     const client = new ApolloClient({
         uri: "http://localhost:4001/graphql",
-        // uri: "http://153.92.214.247:4001/graphql"
+        // uri: "http://192.168.0.162:4001/graphql"
     });
 
     return (
@@ -68,6 +69,7 @@ const App = () => {
                         <ProtectedRoute path={"/adduser"} exact component={<AddUserContainer />}/>
                     </Switch>
                     <ProtectedRoute path={"/logout"} exact component={<LogOut/>}/>
+                    <PopUpContainer />
                 </Provider>
             </ApolloProvider>
         </BrowserRouter>

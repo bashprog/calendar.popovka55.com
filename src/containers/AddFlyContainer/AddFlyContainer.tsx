@@ -5,7 +5,7 @@ import {useQuery} from "react-apollo";
 import {getAllPlanes} from "../../gql/queries/getAllPlanes";
 import Preloader from "../../components/Preloader/Preloader";
 import {useAtom} from "jotai";
-import {authAtom} from "../../atoms";
+import {authAtom, popUpObject} from "../../atoms";
 
 import {useMutation} from "react-apollo";
 import {addFly} from "../../gql/mutations/addFly";
@@ -19,6 +19,8 @@ function formatDate(date: string, time: string) {
 const AddFlyContainer: React.FC = () => {
     const [auth] = useAtom(authAtom);
 
+    const [popUp, changePopUp] = useAtom(popUpObject);
+
     const planes = useQuery(getAllPlanes);
 
     const [selectedDate, setSelectedDate] = React.useState<Date | null>(new Date());
@@ -30,7 +32,7 @@ const AddFlyContainer: React.FC = () => {
     const [addFlyMut, addFlyInfo] = useMutation(addFly);
     const [addCommentMut, addCommentInfo] = useMutation(addComment);
 
-    const add = (): void => {
+     const add = (): void => {
         let date = (document.getElementById("date") as HTMLInputElement).value;
         let time = (document.getElementById("time") as HTMLInputElement).value;
         let duration = (document.getElementById("duration") as HTMLInputElement).value;
@@ -62,9 +64,11 @@ const AddFlyContainer: React.FC = () => {
                             author_id: auth._id,
                             fly_id: data.addFly._id
                         }
-                    }).then(res => console.log(res));
+                    }).then();
             })
             .catch(e => console.log(e));
+
+        changePopUp({visible: true, success: true, object: "fly"});
     };
 
     return (

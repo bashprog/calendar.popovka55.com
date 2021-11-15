@@ -39,14 +39,14 @@ const SettingsContainer: React.FC = () => {
     return (
         <>
             <AccountInfoContainer/>
-            <Grid container className={classes.container}>
+            {auth.role == 'admin' && <Grid container className={classes.container}>
                 <Grid item xs={12} sm={6} className={classes.gridItem}>
                     <PlanesSettingsContainer/>
                 </Grid>
                 <Grid item xs={12} sm={6} className={classes.column}>
                     <UserSettingsContainer/>
                 </Grid>
-            </Grid>
+            </Grid>}
         </>
     )
 };

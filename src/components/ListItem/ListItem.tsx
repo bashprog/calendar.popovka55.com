@@ -12,6 +12,8 @@ import ClearIcon from '@material-ui/icons/Clear';
 
 import {useMutation} from "react-apollo";
 import {deleteFly} from "../../gql/mutations/deleteFly";
+import {useAtom} from "jotai";
+import {authAtom} from "../../atoms";
 
 interface ListItemsProps {
     day?: string;
@@ -63,11 +65,13 @@ const useStyles = makeStyles((theme: Theme) =>
 const ListItem: React.FC<ListItemsProps> = ({day, item, refetch}) => {
     const classes = useStyles();
 
+    const [auth] = useAtom(authAtom);
+
     const getDiapason = (item: DatesArray) => {
         if (!item)
             return null;
 
-        let firstTime: string = item.date.slice(11,16);
+        let firstTime: string = item.date.slice(11, 16);
         let lastTime: string = ((new Date(item.date).addMinutes(item.duration)).toISOString()).slice(11, 16);
 
         return `${firstTime}-${lastTime}`
@@ -98,7 +102,7 @@ const ListItem: React.FC<ListItemsProps> = ({day, item, refetch}) => {
 
     const [deleteFlyById, deleteInfo] = useMutation(deleteFly);
 
-    return(
+    return (
         <>
             {day ?
                 <Grid item xs={12} className={classes.dateBox}>
@@ -116,14 +120,17 @@ const ListItem: React.FC<ListItemsProps> = ({day, item, refetch}) => {
                         {item?.plane?.name}
                     </Grid>
                     <Grid item xs className={classes.rowCell}>
-                        {item?.comments?.length ? item?.comments?.map((el) => (
-                            <span key={el._id}> {setChars(`${el.comment}`)} /   </span>
+                        {item?.comments?.length ? item?.comments?.map((el, i) => (
+                            (item?.comments?.length && item?.comments?.length - 1 == i) ?
+                                <span key={el._id}> {setChars(`${el.comment}`)} </span> :
+                                <span key={el._id}> {setChars(`${el.comment}`)} /  </span>
                         )) : <span className={classes.gray}>Нет комментариев</span>}
                     </Grid>
-                    <Grid item xs={2} md={1} className={classes.lastCell}>
-                        <CreateIcon onClick={changeFlyLink}/>
-                        <ClearIcon onClick={() => deleteFlyById({variables: {fly_id: item?._id}}).then(refetch)}/>
-                    </Grid>
+                    {(item?.author?._id == auth._id) || (auth.role == 'admin') ?
+                        <Grid item xs={2} md={1} className={classes.lastCell}>
+                            <CreateIcon onClick={changeFlyLink}/>
+                            <ClearIcon onClick={() => deleteFlyById({variables: {fly_id: item?._id}}).then(refetch)}/>
+                        </Grid> : null}
                 </Grid>
             }
         </>

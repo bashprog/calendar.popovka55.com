@@ -14,6 +14,8 @@ import {Link, useHistory} from "react-router-dom";
 import {useMutation} from "react-apollo";
 import {deleteFly} from "../../gql/mutations/deleteFly";
 import Preloader from "../Preloader/Preloader";
+import {useAtom} from "jotai";
+import {authAtom} from "../../atoms";
 
 interface IProps {
     day?: string;
@@ -55,6 +57,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 const CardItem: React.FC<IProps> = ({day, item, refetch}) => {
     const classes = useStyles();
 
+    const [auth] = useAtom(authAtom);
+
+    console.log(auth);
+
     const history = useHistory();
 
     const changeFlyLink = (): void => {
@@ -88,11 +94,11 @@ const CardItem: React.FC<IProps> = ({day, item, refetch}) => {
                                     <Typography variant="body2" component="p">
                                         {item?.author?.name}
                                     </Typography>
-                                    <div className={classes.controlBox}>
+                                    {(item?.author?._id == auth._id) || (auth.role == 'admin') ? <div className={classes.controlBox}>
                                         <CreateIcon onClick={changeFlyLink}/>
                                         <ClearIcon
                                             onClick={() => deleteFlyById({variables: {fly_id: item?._id}}).then(refetch)}/>
-                                    </div>
+                                    </div> : null}
                                 </CardContent>
                             </Card>
                         </Grid>

@@ -91,7 +91,7 @@ class Auth {
             }).catch(() => this.serverError());
     }
 
-    writeInfo(data: any){
+    writeInfo(data: any) {
         const {_id, name, email, password, token, role} = data;
 
         if (_id) {
@@ -149,7 +149,9 @@ class Auth {
         this.errorMessage += "Invalid email or password";
     }
 
-     logout(): void {
+    logout(): void {
+        deleteCookie("token");
+
         this.authenticated = false;
         this.error = false;
         this.errorMessage = "";
@@ -159,8 +161,6 @@ class Auth {
         this.email = "";
         this.token = "";
         this.role = undefined;
-
-        deleteCookie("token");
     }
 
     getInfo = () => {
