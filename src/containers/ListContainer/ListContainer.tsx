@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
             width: "100%",
             margin: "50px auto 0",
             border: "1px solid rgba(0, 0, 0, 0.2)",
+            borderBottom: "0",
             borderRadius: "8px",
             flexDirection: "column",
             overflow: "hidden",

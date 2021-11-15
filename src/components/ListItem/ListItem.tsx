@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         rowCell: {
             borderRight: "1px solid rgba(0, 0, 0, 0.2)",
+            marginRight: "-1px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
