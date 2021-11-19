@@ -8,7 +8,7 @@ import {getAllPlanes} from "../../gql/queries/getAllPlanes";
 import {changeFly} from "../../gql/mutations/changeFly";
 
 import {useAtom} from "jotai";
-import {authAtom} from "../../atoms";
+import {authAtom, popUpObject} from "../../atoms";
 import Preloader from "../../components/Preloader/Preloader";
 
 
@@ -25,6 +25,8 @@ const ChangeFlyContainer: React.FC = () => {
     const planes = useQuery(getAllPlanes);
 
     const [changeFlyMut, changeInfo] = useMutation(changeFly);
+
+    const [popUp, changePopUp] = useAtom(popUpObject);
 
     const handleSaveChanges = () => {
         let date = (document.getElementById("c-date") as HTMLInputElement).value;
@@ -49,7 +51,16 @@ const ChangeFlyContainer: React.FC = () => {
                 date: obj.date,
                 duration: obj.duration
             }
-        }));
+        })).then(() => changePopUp({
+            visible: true,
+            success: true,
+            object: "changefly"
+        }))
+            .catch(() => changePopUp({
+                visible: true,
+                success: false,
+                object: "changefly"
+            }));
     };
 
     return (

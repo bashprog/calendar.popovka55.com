@@ -57,6 +57,7 @@ const AddFlyContainer: React.FC = () => {
             }
         })
             .then(({data}) => {
+                changePopUp({visible: true, success: true, object: "addfly"});
                 if (comment)
                     addCommentMut({
                         variables: {
@@ -66,9 +67,8 @@ const AddFlyContainer: React.FC = () => {
                         }
                     }).then();
             })
-            .catch(e => console.log(e));
+            .catch(e => changePopUp({visible: true, success: false, object: "addfly"}));
 
-        changePopUp({visible: true, success: true, object: "fly"});
     };
 
     return (

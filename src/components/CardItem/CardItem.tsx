@@ -15,7 +15,7 @@ import {useMutation} from "react-apollo";
 import {deleteFly} from "../../gql/mutations/deleteFly";
 import Preloader from "../Preloader/Preloader";
 import {useAtom} from "jotai";
-import {authAtom} from "../../atoms";
+import {authAtom, popUpObject} from "../../atoms";
 
 interface IProps {
     day?: string;
@@ -57,6 +57,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 const CardItem: React.FC<IProps> = ({day, item, refetch}) => {
     const classes = useStyles();
 
+    const [popUp, changePopUp] = useAtom(popUpObject);
+
     const [auth] = useAtom(authAtom);
 
     console.log(auth);
@@ -97,7 +99,10 @@ const CardItem: React.FC<IProps> = ({day, item, refetch}) => {
                                     {(item?.author?._id == auth._id) || (auth.role == 'admin') ? <div className={classes.controlBox}>
                                         <CreateIcon onClick={changeFlyLink}/>
                                         <ClearIcon
-                                            onClick={() => deleteFlyById({variables: {fly_id: item?._id}}).then(refetch)}/>
+                                            onClick={() => deleteFlyById({variables: {fly_id: item?._id}})
+                                                .then(() => changePopUp({visible: true, success: true, object: "deletefly"}))
+                                                .catch(() => changePopUp({visible: true, success: false, object: "deletefly"}))
+                                                .then(refetch)}/>
                                     </div> : null}
                                 </CardContent>
                             </Card>
